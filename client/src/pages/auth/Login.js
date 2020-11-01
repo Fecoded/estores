@@ -1,21 +1,8 @@
 import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
 
-import { FormInput } from '../../components/inputField/inputField';
-import { Form } from '../../components/form/form-style';
-import { Button } from '../../components/button';
-import {
-  Container,
-  Card,
-  ImageContainer,
-  Image,
-  FormControl,
-  CheckBoxContainer,
-} from './login-&-register-style';
+import logo from '../../assets/logo.png'
 
-// Styles
-import img from '../../assets/img.jpg';
-import GoogleImg from '../../assets/google.png';
 
 const Login = () => {
   const [email, setEmail] = useState('');
@@ -26,60 +13,66 @@ const Login = () => {
   };
 
   return (
-    <Container>
-      <Card>
-        <ImageContainer>
-          <Image src={img} />
-        </ImageContainer>
-        <Form onSubmit={onSubmit}>
-          <Button isGoogleSignIn type='button'>
-            <img src={GoogleImg} alt='' />
-            <a href='http://localhost:4000/api/auth/google'>
-              Log in with Google
-            </a>
-          </Button>
-
-          <small>or</small>
-
-          <FormControl>
-            <FormInput
-              type='email'
-              name='email'
-              value={email}
-              placeholder='Email Address'
-              handleChange={(e) => setEmail(e.target.value)}
-            />
-          </FormControl>
-
-          <FormControl>
-            <FormInput
-              type='password'
-              name='password'
-              value={password}
-              placeholder='Password'
-              handleChange={(e) => setPassword(e.target.value)}
-            />
-          </FormControl>
-
-          <CheckBoxContainer>
-            <div>
-              <label>
-                <input type='checkbox' className='filled-in' />
-                <span>Remember me</span>
-              </label>
-            </div>
-
-            <Link to='/forgotpassword'>Forgot Password</Link>
-          </CheckBoxContainer>
-
-          <Button>Login</Button>
-
-          <small>
-            Don't have an account? <Link to='/register'>Sign Up</Link>
-          </small>
-        </Form>
-      </Card>
-    </Container>
+  <div id="main-content">
+    <div className="login_register_wrap section">
+      <div className="container">
+          <div className="row justify-content-center">
+              <div className="col-xl-6 col-md-10">
+                  <div className="login_wrap">
+                  <div className="padding_eight_all bg-white">
+                          <div className="row justify-content-center">
+                              <img className="auth-logo" src={logo} alt='logo' />
+                          </div>
+                          <form onSubmit={onSubmit}>
+                              <div className="form-group">
+                                  <input 
+                                    type="text" 
+                                    required 
+                                    className="form-control"
+                                    value={email}
+                                    name="email" 
+                                    placeholder="Your Email"
+                                    onChange={(e) => setEmail(e.target.value)}
+                                    />
+                              </div>
+                              <div className="form-group">
+                                  <input 
+                                    className="form-control" 
+                                    required 
+                                    type="password" 
+                                    name="password" 
+                                    placeholder="Password"
+                                    value={password}
+                                    onChange={(e) => setPassword(e.target.value)}
+                                    />
+                              </div>
+                              <div className="login_footer form-group">
+                                  <div className="chek-form">
+                                      <div className="custome-checkbox">
+                                          <input className="form-check-input" type="checkbox" name="checkbox" id="exampleCheckbox1" value="" defaultChecked/>
+                                          <label className="form-check-label" htmlFor="exampleCheckbox1"><span>Remember me</span></label>
+                                      </div>
+                                  </div>
+                                  <Link to="/forgotpassword">Forgot password?</Link>
+                              </div>
+                              <div className="form-group">
+                                  <button type="submit" className="btn btn-fill-out btn-block" name="login">Log in</button>
+                              </div>
+                          </form>
+                          <div className="different_login">
+                              <span> or</span>
+                          </div>
+                          <ul className="btn-login list_none text-center">
+                              <li><a href="http://localhost:4000/api/auth/google" className="btn btn-google"><i className="ion-social-googleplus"></i>Log in with Google</a></li>
+                          </ul>
+                          <div className="form-note text-center">Don't Have an Account? <Link to="/register">Sign up now</Link></div>
+                      </div>
+                  </div>
+              </div>
+          </div>
+      </div>
+  </div>
+</div>       
   );
 };
 

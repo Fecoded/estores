@@ -1,97 +1,100 @@
 import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
 
-import { FormInput } from '../../components/inputField/inputField';
-import { Form } from '../../components/form/form-style';
-import { Button } from '../../components/button';
-import {
-  Container,
-  Card,
-  ImageContainer,
-  Image,
-  FormControl,
-  CheckBoxContainer,
-} from './login-&-register-style';
-
-// Styles
-import img from '../../assets/img.jpg';
-import GoogleImg from '../../assets/google.png';
+import logo from '../../assets/logo.png'
 
 const Register = () => {
-  const [username, setUsername] = useState('');
+  const [name, setName] = useState('');
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
+  const [confirmPassword, setConfirmPassword] = useState('');
 
   const onSubmit = (e) => {
     e.preventDefault();
   };
 
   return (
-    <Container>
-      <Card>
-        <ImageContainer>
-          <Image src={img} />
-        </ImageContainer>
-        <Form onSubmit={onSubmit}>
-          <Button isGoogleSignIn type='button'>
-            <img src={GoogleImg} alt='' />
-            <a href='http://localhost:4000/api/auth/google'>
-              Log in with Google
-            </a>
-          </Button>
-
-          <small>or</small>
-
-          <FormControl>
-            <FormInput
-              type='text'
-              name='username'
-              value={username}
-              placeholder='Username'
-              handleChange={(e) => setUsername(e.target.value)}
-            />
-          </FormControl>
-
-          <FormControl>
-            <FormInput
-              type='email'
-              name='email'
-              value={email}
-              placeholder='Email Address'
-              handleChange={(e) => setEmail(e.target.value)}
-            />
-          </FormControl>
-
-          <FormControl>
-            <FormInput
-              type='password'
-              name='password'
-              value={password}
-              placeholder='Password'
-              handleChange={(e) => setPassword(e.target.value)}
-            />
-          </FormControl>
-
-          <CheckBoxContainer>
-            <div>
-              <label>
-                <input type='checkbox' className='filled-in' />
-                <span>
-                  I agree to the
-                  <Link to='/termsandconditions'> Terms and Conditions</Link>
-                </span>
-              </label>
+  <div id="main-content">
+      <div className="login_register_wrap section">
+         <div className="container">
+            <div className="row justify-content-center">
+              <div className="col-xl-6 col-md-10">
+                <div className="login_wrap">
+            		<div className="padding_eight_all bg-white">
+                       <div className="row justify-content-center">
+                              <img className="auth-logo" src={logo} alt='logo' />
+                          </div>
+                        <form onSubmit={onSubmit}>
+                            <div className="form-group">
+                                <input 
+                                  type="text" 
+                                  required 
+                                  className="form-control" 
+                                  name="name" 
+                                  placeholder="Name"
+                                  value={name}
+                                  onChange={(e) => setName(e.target.value)}
+                                  />
+                            </div>
+                            <div className="form-group">
+                                <input 
+                                  type="text" 
+                                  required 
+                                  className="form-control" 
+                                  name="email" 
+                                  placeholder="Email Address"
+                                  value={email}
+                                  onChange={(e) => setEmail(e.target.value)}
+                                  />
+                            </div>
+                            <div className="form-group">
+                                <input 
+                                  className="form-control" 
+                                  required 
+                                  type="password" 
+                                  name="password" 
+                                  placeholder="Password"
+                                  value={password}
+                                  onChange={(e) => setPassword(e.target.value)}
+                                  />
+                            </div>
+                            <div className="form-group">
+                                <input 
+                                  className="form-control" 
+                                  required 
+                                  type="password" 
+                                  name="password" 
+                                  placeholder="Confirm Password"
+                                  value={confirmPassword}
+                                  onChange={(e) => setConfirmPassword(e.target.value)}
+                                  />
+                            </div>
+                            <div className="login_footer form-group">
+                                <div className="chek-form">
+                                    <div className="custome-checkbox">
+                                        <input className="form-check-input" type="checkbox" name="checkbox" id="exampleCheckbox2"  required/>
+                                        <label className="form-check-label" htmlFor="exampleCheckbox2"><span>I agree to terms &amp; Policy.</span></label>
+                                    </div>
+                                </div>
+                            </div>
+                            <div className="form-group">
+                                <button type="submit" className="btn btn-fill-out btn-block" name="register">Register</button>
+                            </div>
+                        </form>
+                        <div className="different_login">
+                            <span> or</span>
+                        </div>
+                        <ul className="btn-login list_none text-center">
+                            <li><a href="http://localhost:4000/api/auth/google" className="btn btn-google"><i className="ion-social-googleplus"></i>Log in with Google</a></li>
+                        </ul>
+                        <div className="form-note text-center">Already have an account? <Link to="/login">Log in</Link></div>
+                    </div>
+                </div>
             </div>
-          </CheckBoxContainer>
-
-          <Button>Register</Button>
-
-          <small>
-            Already Registered? <Link to='/login'>Sign In</Link>
-          </small>
-        </Form>
-      </Card>
-    </Container>
+        </div>
+    </div>
+</div>
+    </div>         
   );
 };
 
