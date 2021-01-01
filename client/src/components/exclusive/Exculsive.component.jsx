@@ -1,4 +1,5 @@
 import React from 'react'
+import { Link } from 'react-router-dom'
 
 const ExclusiveItem = () => {
     return(
@@ -392,7 +393,7 @@ const ExclusiveItem = () => {
                                             <ul className="list_none pr_action_btn">
                                                 <li className="add-to-cart"><a href="#!"><i className="icon-basket-loaded"></i> Add To Cart</a></li>
                                                 <li><a href="shop-compare.html" className="popup-ajax"><i className="icon-shuffle"></i></a></li>
-                                                <li><a href="shop-quick-view.html" className="popup-ajax"><i className="icon-magnifier-add"></i></a></li>
+                                                <li><Link to="/show-detail" className="popup-ajax"><i className="icon-magnifier-add"></i></Link></li>
                                                 <li><a href="#!"><i className="icon-heart"></i></a></li>
                                             </ul>
                                         </div>

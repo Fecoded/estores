@@ -1,5 +1,5 @@
 import React from 'react'
-import logo from '../../assets/logo.png'
+import logo from '../../assets/footer-logo.png'
 
 const Footer = () => (
     <footer className="footer_dark">
