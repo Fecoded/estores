@@ -37,11 +37,13 @@ if (process.env.NODE_ENV === "development") {
 const auth = require("./routes/auth");
 const user = require("./routes/user");
 const category = require("./routes/category");
+const product = require("./routes/product");
 
 // Register Routes
 app.use("/api/v1/auth", auth);
 app.use("/api/v1/user", user);
 app.use("/api/v1/category", category);
+app.use("/api/v1/product", product);
 
 const PORT = process.env.PORT || 4000;
 

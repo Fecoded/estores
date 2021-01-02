@@ -1,9 +1,17 @@
 const mongoose = require("mongoose");
 
 const ProductSchema = mongoose.Schema({
+  user: {
+    type: mongoose.Schema.Types.ObjectId,
+    ref: "user",
+  },
   name: {
     type: String,
     required: [true, "Product name is required"],
+  },
+  img: {
+    type: String,
+    required: [true, "Image is required"],
   },
   price: {
     type: String,
@@ -25,6 +33,8 @@ const ProductSchema = mongoose.Schema({
   },
   type: {
     type: String,
+    emun: ["Featured", "Exculsive"],
+    default: "None",
     required: [true, "Product type is required"],
   },
   quantity: {
