@@ -50,6 +50,10 @@ img {
   width: 70%;
 }
 
+.cursor-pointer {
+  cursor: pointer;
+}
+
 /* .input-field input[type='email'].valid {
   border-bottom: 1px solid #000 !important;
   box-shadow: 0 1px 0 0 #000 !important;

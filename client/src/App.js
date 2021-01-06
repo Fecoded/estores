@@ -1,16 +1,17 @@
-import React from 'react';
-import { BrowserRouter as Router } from 'react-router-dom';
+import React, { Fragment } from "react";
 
-import Routes from './pages';
+import Routes from "./pages";
+import { ToastContainer, Zoom } from "react-toastify";
 
 // Styles
-import './styles/style.css';
+import "./styles/style.css";
 
 const App = () => {
   return (
-    <Router>
+    <Fragment>
       <Routes />
-    </Router>
+      <ToastContainer draggable={false} transition={Zoom} autoClose={3000} />
+    </Fragment>
   );
 };
 

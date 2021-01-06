@@ -105,7 +105,7 @@ exports.postProduct = async (req, res, next) =>
         //   res.status(200).json({ success: true, data: product });
         // });
       } catch (err) {
-        console.log(err);
+        // console.log(err);
         if (err.name === "ValidationError") {
           const msgs = Object.values(err.errors).map((val) => val.message);
           return res.status(400).json({
