@@ -54,6 +54,17 @@ img {
   cursor: pointer;
 }
 
+.footer {
+  position: relative !important;
+  bottom: 0 !important;
+  width: 100%;
+  background-color: #202325;
+}
+
+.icon_box_style4 {
+  padding: 0px !important;
+}
+
 /* .input-field input[type='email'].valid {
   border-bottom: 1px solid #000 !important;
   box-shadow: 0 1px 0 0 #000 !important;

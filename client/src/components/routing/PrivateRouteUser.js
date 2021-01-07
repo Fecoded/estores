@@ -4,7 +4,7 @@ import { Route, Redirect } from 'react-router-dom';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 
-import { selectCurrentUser } from '../../redux/user/user.selector';
+import { selectCurrentUser } from '../../redux/user/userSelectors';
 
 const PrivateRouteUser = ({
   component: Component,

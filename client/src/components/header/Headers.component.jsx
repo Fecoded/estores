@@ -4,7 +4,6 @@ import logo from "../../assets/header-logo.png";
 import { Link } from "react-router-dom";
 
 import { getCategory } from "../../redux/category/categoryActions";
-import { loadUser, logout } from "../../redux/user/userActions";
 
 const Header = () => {
   const dispatch = useDispatch();
@@ -14,7 +13,6 @@ const Header = () => {
 
   useEffect(() => {
     dispatch(getCategory());
-    dispatch(loadUser());
   }, [dispatch]);
 
   return (
@@ -39,15 +37,17 @@ const Header = () => {
                   {/* <li><a href="wishlist.html"><i className="ti-heart"></i><span>Wishlist</span></a></li> */}
                   {isAuthenticated && user ? (
                     <li>
-                      <i className="ti-user"></i>
-                      <span>{user && user.displayName}</span>
+                      <Link to='/account'>
+                        <i className="ti-user"></i>
+                        <span>{user && user.displayName ? user && user.displayName : 'Admin'}</span>
+                      </Link>
 
-                      <span
+                      {/* <span
                         className="ml-3 cursor-pointer"
                         onClick={() => dispatch(logout())}
                       >
                         Logout
-                      </span>
+                      </span> */}
                     </li>
                   ) : (
                     <li>
@@ -79,7 +79,7 @@ const Header = () => {
                     >
                       <ul className="navbar-nav">
                         <li className="dropdown">
-                          <Link className="nav-link active" to="/">
+                          <Link className="nav-link" to="/">
                             Home
                           </Link>
                         </li>
@@ -165,9 +165,9 @@ const Header = () => {
                         </li> */}
 
                         <li>
-                          <a className="nav-link nav_item" href="contact.html">
+                          <Link className="nav-link nav_item" to="/contact">
                             Contact Us
-                          </a>
+                          </Link>
                         </li>
                       </ul>
                     </div>

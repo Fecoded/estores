@@ -27,10 +27,10 @@ const Shop = () => {
                     </div>
                     <div className="product_header_right">
                       <div className="products_view">
-                        <a href="#!" className="shorting_icon grid active">
+                        <a href="#!" className="shorting_icon grid ">
                           <i className="ti-view-grid"></i>
                         </a>
-                        <a href="#!" className="shorting_icon list">
+                        <a href="#!" className="shorting_icon list active">
                           <i className="ti-layout-list-thumb"></i>
                         </a>
                       </div>
@@ -53,7 +53,7 @@ const Shop = () => {
                 data-finish-message="No More Item to Show"
                 data-btn="Load More"
               >
-                <div className="col-lg-3 col-md-4 col-6 grid_item">
+                 <div className="col-lg-3 col-md-4 col-6 grid_item">
                   <div className="product">
                     <div className="product_img">
                       <a href="shop-product-detail.html">
@@ -152,7 +152,7 @@ const Shop = () => {
                       </div>
                     </div>
                   </div>
-                </div>
+                </div> 
                 <div className="col-lg-3 col-md-4 col-6 grid_item">
                   <div className="product">
                     <div className="product_img">
@@ -252,7 +252,7 @@ const Shop = () => {
                       </div>
                     </div>
                   </div>
-                </div>
+                </div> 
                 <div className="col-lg-3 col-md-4 col-6 grid_item">
                   <div className="product">
                     <span className="pr_flash">New</span>
