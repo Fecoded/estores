@@ -78,6 +78,8 @@ exports.postProduct = async (req, res, next) =>
           quantity,
         } = req.body;
 
+        console.log(req.body)
+
         const productFields = {};
         productFields.user = req.user.id;
         if (name) productFields.name = name;
@@ -95,7 +97,7 @@ exports.postProduct = async (req, res, next) =>
         product.img = result.secure_url;
 
         Product.create(product);
-        res.status(200).json({ success: true, data: product });
+        res.status(200).json({ success: true, data: product, message: "Product was created successfully" });
 
         // cloudinary.v2.uploader.upload(file.path).then((result, error) => {
         //   if (error) throw console.log(error);
@@ -105,7 +107,7 @@ exports.postProduct = async (req, res, next) =>
         //   res.status(200).json({ success: true, data: product });
         // });
       } catch (err) {
-        // console.log(err);
+        console.log(err);
         if (err.name === "ValidationError") {
           const msgs = Object.values(err.errors).map((val) => val.message);
           return res.status(400).json({
@@ -176,7 +178,7 @@ exports.deleteProduct = async (req, res, next) => {
       return res.status(400).json({ msg: "Product does not exist" });
     }
 
-    await Product.findByIdAndRemove(req.param.id);
+    await Product.findByIdAndRemove(req.params.id);
 
     product = await Product.find().sort({ createdAt: -1 });
 

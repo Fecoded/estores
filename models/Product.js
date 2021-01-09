@@ -34,7 +34,7 @@ const ProductSchema = mongoose.Schema({
   type: {
     type: String,
     emun: ["Featured", "Exculsive"],
-    default: "None",
+    default: "Featured",
     required: [true, "Product type is required"],
   },
   quantity: {

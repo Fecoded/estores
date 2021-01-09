@@ -2,8 +2,10 @@ import {
   START_SPINNER,
   USER_LOADED,
   LOGIN_SUCCESS,
+  UPDATE_PROFILE,
   LOGIN_FAIL,
   AUTH_ERROR,
+  PROFILE_ERROR,
   LOGOUT,
 } from "./userTypes";
 import axios from "axios";
@@ -107,6 +109,38 @@ export const register = ({
     }
     dispatch({
       type: LOGIN_FAIL,
+      payload: errors,
+    });
+  }
+};
+
+// UPDATE USER PROFILE
+export const updateProfile = (formData) => async (dispatch) => {
+
+  const config = {
+    headers: {
+      "Content-Type": "application/json",
+    },
+  };
+
+  try {
+    dispatch({ type: START_SPINNER });
+    const res = await axios.put("/api/v1/auth/profile", formData, config);
+
+    dispatch({
+      type: UPDATE_PROFILE,
+      // payload: res.data.message,
+    });
+
+    toast.success(`❤️ ${res.data.message}`)
+  } catch (err) {
+    const errors = err.response.data.msg;
+
+    if (errors) {
+      toast.error(errors);
+    }
+    dispatch({
+      type: PROFILE_ERROR,
       payload: errors,
     });
   }

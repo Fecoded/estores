@@ -36,7 +36,7 @@ exports.postCategory = async (req, res, next) => {
     }
 
     category = await Category.create({ description });
-    res.status(201).json({ success: true, data: category });
+    res.status(201).json({ success: true, data: category, message: `${description} category was created` });
   } catch (err) {
     if (err.name === "ValidationError") {
       const msgs = Object.values(err.errors).map((val) => val.message);

@@ -30,7 +30,7 @@ const CategoryReducer = (state = INITIALSTATE, action) => {
     case CREATE_CATEGORY:
       return {
         ...state,
-        categories: [...state.categories, payload],
+        categories: [payload, ...state.categories],
         loading: false,
       };
     case UPDATE_CATEGORY:

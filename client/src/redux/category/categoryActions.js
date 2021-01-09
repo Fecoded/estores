@@ -7,6 +7,8 @@ import {
   CATEGORY_ERROR,
 } from "./categoryTypes";
 import axios from "axios";
+import { toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 
 export const getCategory = () => async (dispatch) => {
   try {
@@ -39,11 +41,15 @@ export const createCategory = (formData) => async (dispatch) => {
       type: CREATE_CATEGORY,
       payload: res.data.data,
     });
+
+    toast.success(`❤️ ${res.data.message}`)
+    formData.setDescription('')
   } catch (err) {
     dispatch({
       type: CATEGORY_ERROR,
       payload: err.response.data.errors,
     });
+    toast.error(`❤️ ${err.response.data.msg}`)
   }
 };
 
@@ -76,7 +82,7 @@ export const updateCategory = (formData) => async (dispatch) => {
 
 export const deleteCategory = (id) => async (dispatch) => {
   try {
-    await axios.put(`/api/v1/category/${id}`);
+    await axios.delete(`/api/v1/category/${id}`);
 
     dispatch({
       type: DELETE_CATEGORY,

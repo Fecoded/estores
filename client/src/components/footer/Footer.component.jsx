@@ -65,7 +65,7 @@ const Footer = () => (
                         <ul className="contact_info contact_info_light">
                             <li>
                                 <i className="ti-location-pin"></i>
-                                <p>123 Street, Old Trafford, New South London , UK</p>
+                                <p>Auchi, Edo State, Nigeria</p>
                             </li>
                             <li>
                                 <i className="ti-email"></i>
@@ -73,7 +73,7 @@ const Footer = () => (
                             </li>
                             <li>
                                 <i className="ti-mobile"></i>
-                                <p>+ 457 789 789 65</p>
+                                <p>+(234) 813 486 6263</p>
                             </li>
                         </ul>
                     </div>

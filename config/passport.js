@@ -9,7 +9,7 @@ module.exports = (passport) => {
       {
         clientID: process.env.GOOGLE_CLIENT_ID,
         clientSecret: process.env.GOOGLE_CLIENT_SECRET,
-        callbackURL: "http://localhost:3000",
+        callbackURL: "http://localhost:3000/account",
       },
       async (accessToken, refreshToken, profile, done) => {
         const newUser = {
@@ -34,6 +34,7 @@ module.exports = (passport) => {
                 return res.status(201).json({ success: true, data: token });
               }
             );
+  
             done(null, user);
           } else {
             user = await User.create(newUser);

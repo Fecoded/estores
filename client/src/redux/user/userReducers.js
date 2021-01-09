@@ -2,8 +2,10 @@ import {
   START_SPINNER,
   USER_LOADED,
   LOGIN_SUCCESS,
+  UPDATE_PROFILE,
   LOGIN_FAIL,
   AUTH_ERROR,
+  PROFILE_ERROR,
   LOGOUT,
 } from "./userTypes";
 
@@ -37,6 +39,17 @@ export default (state = initialState, action) => {
         isAuthenticated: true,
         loading: false,
       };
+    case UPDATE_PROFILE: 
+      return {
+        ...state,
+        loading: false
+      }
+    case PROFILE_ERROR: 
+    return {
+      ...state,
+      loading: false,
+      error: payload
+    }
     case AUTH_ERROR:
     case LOGIN_FAIL:
     case LOGOUT:

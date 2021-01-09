@@ -35,6 +35,9 @@ const UserSchema = new mongoose.Schema({
   phone: {
     type: String,
   },
+  shipping_address: {
+    type: String,
+  },
   createdAt: {
     type: Date,
     default: Date.now,
