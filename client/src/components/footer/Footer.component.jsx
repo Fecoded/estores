@@ -1,9 +1,17 @@
 import React from 'react'
+import {Link} from 'react-router-dom'
 import logo from '../../assets/footer-logo.png'
+import {WhatsappShareButton,FacebookShareButton, TwitterShareButton, FacebookIcon, WhatsappIcon, TwitterIcon} from 'react-share'
 
-const Footer = () => (
+import {useSelector} from 'react-redux'
+
+const Footer = () =>{ 
+
+    const {categories} = useSelector((state) =>  state.categoryReducer)
+
+    return (
     <footer className="footer_dark">
-	<div className="mt-100">
+	<div className="pt-80">
         <div className="container">
             <div className="row">
                 <div className="col-lg-3 col-md-6 col-sm-12">
@@ -15,11 +23,21 @@ const Footer = () => (
                     </div>
                     <div className="widget">
                         <ul className="social_icons social_white">
-                            <li><a href="#!"><i className="ion-social-facebook"></i></a></li>
-                            <li><a href="#!"><i className="ion-social-twitter"></i></a></li>
-                            <li><a href="#!"><i className="ion-social-googleplus"></i></a></li>
-                            <li><a href="#!"><i className="ion-social-youtube-outline"></i></a></li>
-                            <li><a href="#!"><i className="ion-social-instagram-outline"></i></a></li>
+                            <li>
+                            <FacebookShareButton url={window.location.href}>
+                                <FacebookIcon size={20} round={true} />
+                            </FacebookShareButton>
+                            </li>
+                            <li>
+                            <WhatsappShareButton url={window.location.href}>
+                                <WhatsappIcon size={20} round={true} />
+                            </WhatsappShareButton>
+                            </li>
+                            <li>
+                            <TwitterShareButton url={window.location.href}>
+                                <TwitterIcon size={20} round={true} />
+                            </TwitterShareButton>
+                            </li>
                         </ul>
                     </div>
         		</div>
@@ -27,35 +45,32 @@ const Footer = () => (
                 	<div className="widget">
                         <h6 className="widget_title">Useful Links</h6>
                         <ul className="widget_links">
-                            <li><a href="#!">About Us</a></li>
-                            <li><a href="#!">FAQ</a></li>
-                            <li><a href="#!">Location</a></li>
-                            <li><a href="#!">Affiliates</a></li>
-                            <li><a href="#!">Contact</a></li>
+                            <li><Link to="/contact">Contact Us</Link></li>
+                            <li><Link to="/cart">Cart</Link></li>
+                            <li><Link to="/contact">Location</Link></li>
+                            <li><Link to="/checkout">CheckOut</Link></li>
+                            {/* <li><a href="#!">Contact</a></li> */}
                         </ul>
                     </div>
                 </div>
                 <div className="col-lg-2 col-md-3 col-sm-6">
                 	<div className="widget">
                         <h6 className="widget_title">Category</h6>
-                        <ul className="widget_links">
-                            <li><a href="#!">Men</a></li>
-                            <li><a href="#!">Woman</a></li>
-                            <li><a href="#!">Kids</a></li>
-                            <li><a href="#!">Best Saller</a></li>
-                            <li><a href="#!">New Arrivals</a></li>
-                        </ul>
+                        {categories.map((category) => (
+                            <ul key={category._id} className="widget_links">
+                                <li><a href="#!">{category.description}</a></li>
+                            </ul>
+                        ))}
                     </div>
                 </div>
                 <div className="col-lg-2 col-md-6 col-sm-6">
                 	<div className="widget">
                         <h6 className="widget_title">My Account</h6>
                         <ul className="widget_links">
-                            <li><a href="#!">My Account</a></li>
-                            <li><a href="#!">Discount</a></li>
+                            <li><Link to="/account">My Account</Link></li>
                             <li><a href="#!">Returns</a></li>
-                            <li><a href="#!">Orders History</a></li>
-                            <li><a href="#!">Order Tracking</a></li>
+                            <li><Link to="/account">Orders History</Link></li>
+                            <li><Link to="/account">Order Tracking</Link></li>
                         </ul>
                     </div>
                 </div>
@@ -87,19 +102,11 @@ const Footer = () => (
                 <div className="col-md-6">
                     <p className="mb-md-0 text-center text-md-left">© 2020 All Rights Reserved by Fecoded</p>
                 </div>
-                {/* <div className="col-md-6">
-                    <ul className="footer_payment text-center text-lg-right">
-                        <li><a href="#!"><img src="assets/images/visa.png" alt="visa"/></a></li>
-                        <li><a href="#!"><img src="assets/images/discover.png" alt="discover"/></a></li>
-                        <li><a href="#!"><img src="assets/images/master_card.png" alt="master_card"/></a></li>
-                        <li><a href="#!"><img src="assets/images/paypal.png" alt="paypal"/></a></li>
-                        <li><a href="#!"><img src="assets/images/amarican_express.png" alt="amarican_express"/></a></li>
-                    </ul>
-                </div> */}
+             
             </div>
         </div>
     </div>
 </footer>
-)
+)}
 
 export default Footer

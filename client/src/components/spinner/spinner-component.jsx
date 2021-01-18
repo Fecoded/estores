@@ -4,6 +4,7 @@ import {
   SpinnerContainer,
   SpinnerOverlay,
   SpinnerOverlay1,
+  SpinnerOverlay2,
 } from "./spinner-style";
 
 export const SpinnerOne = () => (
@@ -13,7 +14,13 @@ export const SpinnerOne = () => (
 );
 
 export const SpinnerTwo = () => (
-  <SpinnerOverlay1>
+  <SpinnerOverlay1 >
     <SpinnerContainer />
   </SpinnerOverlay1>
+);
+
+export const SpinnerThree = () => (
+  <SpinnerOverlay2 >
+    <SpinnerContainer />
+  </SpinnerOverlay2>
 );

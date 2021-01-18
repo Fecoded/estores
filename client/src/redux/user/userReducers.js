@@ -1,6 +1,7 @@
 import {
   START_SPINNER,
   USER_LOADED,
+  GET_USERS,
   LOGIN_SUCCESS,
   UPDATE_PROFILE,
   LOGIN_FAIL,
@@ -14,6 +15,7 @@ const initialState = {
   isAuthenticated: null,
   loading: false,
   user: null,
+  users: []
 };
 
 export default (state = initialState, action) => {
@@ -31,6 +33,12 @@ export default (state = initialState, action) => {
         loading: false,
         user: payload,
       };
+    case GET_USERS:
+      return {
+        ...state,
+        loading: false,
+        users: payload
+      }
     case LOGIN_SUCCESS:
       localStorage.setItem("token", payload);
       return {

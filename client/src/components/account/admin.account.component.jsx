@@ -3,17 +3,15 @@ import {Link} from 'react-router-dom'
 import {useDispatch, useSelector} from 'react-redux'
 import moment from 'moment'
 
-import {logout, updateProfile} from '../../redux/user/userActions'
+import {logout} from '../../redux/user/userActions'
 import {createCategory, deleteCategory} from '../../redux/category/categoryActions'
-import {getProduct, deleteProduct, createProduct} from '../../redux/product/productActions'
+import {getProducts, deleteProduct, createProduct} from '../../redux/product/productActions'
+import {getOrders} from '../../redux/order/orderAction'
+import {SpinnerThree} from '../spinner/spinner-component'
+import Orders from './orders.component'
 
-const Account = () => {
-    const [firstName, setFirstName] = useState('')
-    const [lastName, setLastName] = useState('')
-    const [displayName, setDisplayName] = useState('')
-    const [email, setEmail] = useState('')
-    const [phone, setPhone] = useState('')
-    const [shipping_address, setShippingAddress] = useState('')
+
+const AdminAccount = () => {
     // Category
     const [description, setDescription] = useState('')
     // Product
@@ -30,27 +28,16 @@ const Account = () => {
 
     const dispatch = useDispatch()
 
-    const {user} =  useSelector((state) => state.userReducer)
     const {categories} =  useSelector((state) => state.categoryReducer)
-    const {products} =  useSelector((state) => state.productReducer)
+    const {products, loading} =  useSelector((state) => state.productReducer)
 
     useEffect(() => {
-        if(user) {
-            setFirstName(user.firstName)
-            setLastName(user.lastName)
-            setDisplayName(user.displayName)
-            setEmail(user.email)
-            setPhone(user.phone)
-            setShippingAddress(user.shipping_address)
-        }
-        dispatch(getProduct());
-    },[user, dispatch])
+        dispatch(getProducts());
+        dispatch(getOrders());
+       
+    },[dispatch])
 
-    const onSubmit = (e) => {
-        e.preventDefault();
-        dispatch(updateProfile({firstName, lastName, displayName, email, phone, shipping_address }))
-    }
-
+ 
     const onSubmitCategory = (e) => {
         e.preventDefault();
         dispatch(createCategory({description, setDescription}))
@@ -96,7 +83,6 @@ const Account = () => {
                                         <a className="nav-link active" id="dashboard-tab" data-toggle="tab" href="#dashboard" role="tab" aria-controls="dashboard" aria-selected="false"><i className="ti-layout-grid2"></i>Dashboard</a>
                                     </li>
                                  
-                                    {user && user.role === 'admin' ? (
                                         <Fragment>
                                         <li className="nav-item">
                                            <a className="nav-link" id="all_orders-tab" data-toggle="tab" href="#all_orders" role="tab" aria-controls="all_orders" aria-selected="false"><i className="ti-shopping-cart-full"></i>All Orders</a>
@@ -115,24 +101,6 @@ const Account = () => {
                                         </li>
                                         </Fragment>
                                       
-
-                                    ) : (
-                                        <Fragment>
-                                           <li className="nav-item">
-                                                 <a className="nav-link" id="orders-tab" data-toggle="tab" href="#orders" role="tab" aria-controls="orders" aria-selected="false"><i className="ti-shopping-cart-full"></i>Orders</a>
-                                           </li>
-                                
-                                           <li className="nav-item">
-                                                <a className="nav-link" id="address-tab" data-toggle="tab" href="#address" role="tab" aria-controls="address" aria-selected="true"><i className="ti-location-pin"></i>My Address</a>
-                                           </li>
-
-                                            <li className="nav-item">
-                                                <a className="nav-link" id="account-detail-tab" data-toggle="tab" href="#account-detail" role="tab" aria-controls="account-detail" aria-selected="true"><i className="ti-id-badge"></i>Account Details</a>
-                                            </li>
-
-                                        </Fragment>
-
-                                    )}
                                     <li className="nav-item">
                                         <Link className="nav-link" to="#!" onClick={() => dispatch(logout())}><i className="ti-lock"></i>Logout</Link>
                                     </li>
@@ -151,45 +119,7 @@ const Account = () => {
                                     </div>
                                 </div>
                             </div>
-                            {/* Orders */}
-                            <div className="tab-pane fade" id="orders" role="tabpanel" aria-labelledby="orders-tab">
-                                <div className="card">
-                                    <div className="card-header">
-                                        <h3>Orders</h3>
-                                    </div>
-                                    <div className="card-body">
-                                        <div className="table-responsive">
-                                            <table className="table">
-                                                <thead>
-                                                    <tr>
-                                                        <th>Order</th>
-                                                        <th>Date</th>
-                                                        <th>Status</th>
-                                                        <th>Total</th>
-                                                        <th>Actions</th>
-                                                    </tr>
-                                                </thead>
-                                                <tbody>
-                                                    <tr>
-                                                        <td>#1234</td>
-                                                        <td>March 15, 2020</td>
-                                                        <td>Processing</td>
-                                                        <td>$78.00 for 1 item</td>
-                                                        <td><a href="#!" className="btn btn-fill-out btn-sm">View</a></td>
-                                                    </tr>
-                                                    <tr>
-                                                        <td>#2366</td>
-                                                        <td>June 20, 2020</td>
-                                                        <td>Completed</td>
-                                                        <td>$81.00 for 1 item</td>
-                                                        <td><a href="#!" className="btn btn-fill-out btn-sm">View</a></td>
-                                                    </tr>
-                                                </tbody>
-                                            </table>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
+                          
 
                             {/* All Order */}
                             <div className="tab-pane fade" id="all_orders" role="tabpanel" aria-labelledby="all_orders-tab">
@@ -197,150 +127,11 @@ const Account = () => {
                                     <div className="card-header">
                                         <h3>All Orders</h3>
                                     </div>
-                                    <div className="card-body">
-                                        <div className="table-responsive">
-                                            <table className="table">
-                                                <thead>
-                                                    <tr>
-                                                        <th>Order</th>
-                                                        <th>Date</th>
-                                                        <th>Status</th>
-                                                        <th>Total</th>
-                                                        <th>Actions</th>
-                                                    </tr>
-                                                </thead>
-                                                <tbody>
-                                                    <tr>
-                                                        <td>#1234</td>
-                                                        <td>March 15, 2020</td>
-                                                        <td>Processing</td>
-                                                        <td>$78.00 for 1 item</td>
-                                                        <td><a href="#!" className="btn btn-fill-out btn-sm">View</a></td>
-                                                    </tr>
-                                                    <tr>
-                                                        <td>#2366</td>
-                                                        <td>June 20, 2020</td>
-                                                        <td>Completed</td>
-                                                        <td>$81.00 for 1 item</td>
-                                                        <td><a href="#!" className="btn btn-fill-out btn-sm">View</a></td>
-                                                    </tr>
-                                                </tbody>
-                                            </table>
-                                        </div>
-                                    </div>
+                                    <Orders />
+                               
                                 </div>
                             </div>
 
-
-
-                            <div className="tab-pane fade" id="address" role="tabpanel" aria-labelledby="address-tab">
-                                <div className="row">
-                                    <div className="col-lg-10">
-                                        <div className="card mb-lg-0">
-                                            <div className="d-flex card-header justify-content-between">
-                                                <h3>Shipping Address</h3>
-                                                    {/* <button type="submit" className="btn btn-fill-out" name="submit">Edit</button> */}
-                                            </div>
-                                            <div className="card-body">
-                                                <address>{user && user.shipping_address}</address>
-                                                {/* <p>New York</p> */}
-                                            </div>
-                                           
-                                        </div>
-                                    </div>
-                                  
-                                </div>
-                            </div>
-                            {/* Account Details */}
-                            <div className="tab-pane fade" id="account-detail" role="tabpanel" aria-labelledby="account-detail-tab">
-                                <div className="card">
-                                    <div className="card-header">
-                                        <h3>Account Details</h3>
-                                    </div>
-                                    <div className="card-body">
-                                        <p>Complete Your Profile</p>
-                                        <form onSubmit={onSubmit}>
-                                            <div className="row">
-                                                <div className="form-group col-md-6">
-                                                    <label>First Name <span className="required">*</span></label>
-                                                    <input 
-                                                        required
-                                                        readOnly
-                                                        className="form-control" 
-                                                        name="firstName" 
-                                                        type="text"
-                                                        value={firstName || ''}
-                                                        onChange={(e) => setFirstName(e.target.value)}
-                                                        />
-                                                </div>
-                                                <div className="form-group col-md-6">
-                                                    <label>Last Name <span className="required">*</span></label>
-                                                    <input 
-                                                         required
-                                                         readOnly
-                                                         className="form-control" 
-                                                         name="lastName" 
-                                                         type="text"
-                                                         value={lastName || ''}
-                                                         onChange={(e) => setLastName(e.target.value)}
-                                                    />
-                                                </div>
-                                                <div className="form-group col-md-12">
-                                                    <label>Username <span className="required">*</span></label>
-                                                    <input 
-                                                         required
-                                                         readOnly
-                                                         className="form-control" 
-                                                         name="displayName" 
-                                                         type="text"
-                                                         value={displayName || ''}
-                                                         onChange={(e) => setDisplayName(e.target.value)}
-                                                    />
-                                                </div>
-                                                <div className="form-group col-md-12">
-                                                    <label>Email Address <span className="required">*</span></label>
-                                                    <input
-                                                         required
-                                                         readOnly
-                                                         className="form-control" 
-                                                         name="email" 
-                                                         type="text"
-                                                         value={email || ''}
-                                                         onChange={(e) => setEmail(e.target.value)}
-                                                    />
-                                                </div>
-                                                <div className="form-group col-md-12">
-                                                    <label>Phone Number <span className="required">*</span></label>
-                                                    <input
-                                                         required
-                                                         className="form-control" 
-                                                         name="phone" 
-                                                         type="text"
-                                                         value={phone || ''}
-                                                         onChange={(e) => setPhone(e.target.value)}
-                                                    />
-                                                </div>
-                                              
-                                                <div className="form-group col-md-12">
-                                                    <label>Shipping Address <span className="required">*</span></label>
-                                                    <input
-                                                         required
-                                                         className="form-control" 
-                                                         name="shipping_address" 
-                                                         type="text"
-                                                         value={shipping_address || ''}
-                                                         onChange={(e) => setShippingAddress(e.target.value)}
-                                                    />
-                                                </div>
-                                              
-                                                <div className="col-md-12">
-                                                    <button type="submit" className="btn btn-fill-out" name="submit" value="Submit">Save</button>
-                                                </div>
-                                            </div>
-                                        </form>
-                                    </div>
-                                </div>
-                            </div>
 
                             {/* Create Product */}
                             <div className="tab-pane fade" id="create_product" role="tabpanel" aria-labelledby="create_product-tab">
@@ -454,9 +245,14 @@ const Account = () => {
                                                         onChange={(e) => setQuantity(e.target.value)}
                                                         />
                                                 </div>
+                                                {loading ? (
+                                                    <SpinnerThree />
+                                                ) : (
                                                 <div className="col-md-12">
                                                     <button type="submit" className="btn btn-fill-out" name="submit" value="Submit">Save</button>
                                                 </div>
+
+                                                )}
                                             </div>
                                         </form>
                                     </div>
@@ -484,6 +280,7 @@ const Account = () => {
                                                         <th>Quantity</th>
                                                         <th>Date</th>
                                                         <th></th>
+                                                      
                                                     </tr>
                                                 </thead>
                                                 <tbody>
@@ -498,6 +295,7 @@ const Account = () => {
                                                             <td>{product.type}</td>
                                                             <td>{product.quantity}</td>
                                                             <td>{moment(product.createdAt).format("DD/MM/YYYY")}</td>
+                                                           
                                                             <td><i className="ti-trash cursor-pointer" onClick={() => dispatch(deleteProduct(product._id))}></i></td>
                                                         </tr>
 
@@ -587,4 +385,4 @@ const Account = () => {
     )
 }
 
-export default Account
+export default AdminAccount

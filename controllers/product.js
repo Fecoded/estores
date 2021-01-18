@@ -9,7 +9,7 @@ require("../services/cloudinary");
 
 exports.getProduct = async (req, res, next) => {
   try {
-    const { page = 1, limit = 6 } = req.query;
+    const { page = 1, limit = 12 } = req.query;
 
     const product = await Product.find()
       .sort({ createdAt: -1 })
@@ -46,6 +46,29 @@ exports.getAllProduct = async (req, res, next) => {
     return res
       .status(200)
       .json({ success: true, count: product.length, data: product });
+  } catch (err) {
+    return res.status(500).json({
+      success: false,
+      error: "Server Error",
+    });
+  }
+};
+
+// @desc      GET PRODUCT
+// @routes    GET /api/v1/product/:id
+// @access    Public
+
+exports.getSingleProduct = async (req, res, next) => {
+  try {
+    let product = await Product.findById(req.params.id);
+
+    if(!product) {
+      return res.status(400).json({ msg: "Product does not exist" });
+    }
+
+    return res
+      .status(200)
+      .json({ success: true, data: product });
   } catch (err) {
     return res.status(500).json({
       success: false,

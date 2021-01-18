@@ -1,6 +1,7 @@
 import {
   START_SPINNER,
   USER_LOADED,
+  GET_USERS,
   LOGIN_SUCCESS,
   UPDATE_PROFILE,
   LOGIN_FAIL,
@@ -24,6 +25,26 @@ export const loadUser = () => async (dispatch) => {
 
     dispatch({
       type: USER_LOADED,
+      payload: res.data.data,
+    });
+  } catch (err) {
+    dispatch({
+      type: AUTH_ERROR,
+    });
+  }
+};
+
+// LOAD USERS
+export const loadUsers = () => async (dispatch) => {
+  if (localStorage.token) {
+    setAuthToken(localStorage.token);
+  }
+
+  try {
+    const res = await axios.get("/api/v1/auth/users");
+
+    dispatch({
+      type: GET_USERS,
       payload: res.data.data,
     });
   } catch (err) {
@@ -137,7 +158,7 @@ export const updateProfile = (formData) => async (dispatch) => {
     const errors = err.response.data.msg;
 
     if (errors) {
-      toast.error(errors);
+      toast.error(`❤️ ${errors}`);
     }
     dispatch({
       type: PROFILE_ERROR,

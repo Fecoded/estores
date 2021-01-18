@@ -17,8 +17,12 @@ const HomePage = lazy(() => import("./home/homePage"));
 const ProductDetails = lazy(() => import("./product/product"));
 const ShopPage = lazy(() => import("./shop/Shop"));
 const ContactPage = lazy(() => import('./contact/contact'))
+const CartPage = lazy(() => import('./cart/CartPage'))
+const CheckOutPage = lazy(() => import('./checkout/CheckOutPage'))
+const CompletedPage = lazy(() => import('./checkout/CompletedPage'))
 
-const Account = lazy(() => import('./account'))
+const User = lazy(() => import('./account/User'))
+const Admin = lazy(() => import('./account/Admin'))
 
 // Admin
 const AdminLogin = lazy(() => import("./auth/AdminLogin"));
@@ -48,9 +52,12 @@ const Routes = ({ user: { isAuthenticated, user }, loadUser }) =>{
               isAuthenticated && user ? <Redirect to="/" /> : <Register />
             }
           />
-          <Route exact path="/show-detail" component={ProductDetails} />
+          <Route exact path="/:id/:productname" component={ProductDetails} />
           <Route exact path="/shops" component={ShopPage} />
           <Route exact path="/contact" component={ContactPage} />
+          <Route exact path="/cart" component={CartPage} />
+          <Route exact path="/checkout" component={CheckOutPage} />
+          <Route exact path="/complete" component={CompletedPage} />
           <Route
             exact
             path="/admin/login"
@@ -62,7 +69,11 @@ const Routes = ({ user: { isAuthenticated, user }, loadUser }) =>{
               )
             }
           />
-          <PrivateRouteUser exact path="/account" component={Account}/>
+          {user && user.role === 'user' ? (
+            <PrivateRouteUser exact path="/account" component={User}/>
+          ) : (
+            <PrivateRouteUser exact path="/account" component={Admin}/>
+          )}
         </Suspense>
       </ErrorHandler>
     </Switch>
@@ -78,7 +89,7 @@ const mapStateToProps = createStructuredSelector({
 });
 
 const mapDispatchToProps = dispatch => ({
-  loadUser: () => dispatch(loadUser())
+  loadUser: () => dispatch(loadUser()),
 })
 
 export default connect(mapStateToProps, mapDispatchToProps)(Routes);

@@ -17,6 +17,7 @@ const PrivateRouteUser = ({
       !isAuthenticated && token === null ? (
         <Redirect to='/' />
       ) : (
+        
         <Component {...props} />
       )
     }

@@ -17,11 +17,22 @@ a {
 .mt-1 {
   margin-top: 1rem;
 }
+
+.pt-80 {
+  padding-top: 80px;
+}
 /* 
 img {
   width: 50px;
   height: 50px;
 } */
+
+.min-vh-50 {
+  min-height: 50vh;
+}
+.min-vh-70 {
+  min-height: 70vh;
+}
 
 .s-50 {
   width: 50px;
@@ -32,6 +43,14 @@ img {
   width: 100px;
   height: 100px;
   margin: 20px;
+}
+
+.margin-auto {
+  margin: 0 auto;
+}
+
+.w-35 {
+  width: 35%;
 }
 
 .w-80 {
@@ -145,3 +164,6 @@ img {
 .mt-100 {
   margin-top: 100px;
 }
+
+/* .section-padding {
+} */

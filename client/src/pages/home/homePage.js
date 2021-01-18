@@ -4,7 +4,7 @@ import Header from "../../components/header/Headers.component";
 import Banner from "../../components/banner/Banner.component";
 import Footer from "../../components/footer/Footer.component";
 import Featured from "../../components/featured/Featured.component";
-import Exclusive from "../../components/exclusive/Exculsive.component";
+import Exclusive from "../../components/exclusive/Exclusive.component";
 
 const HomePage = () => {
   return (

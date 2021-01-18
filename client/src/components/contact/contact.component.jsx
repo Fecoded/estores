@@ -6,9 +6,9 @@ const Contact  = () => {
             
         <div className="main_content">
 
-        <div className="section bg_light_blue2">
+        <div className="section bg_light_blue2 min-vh-100">
             <div className="container">
-                <div className="row justify-content-center">
+                <div className="row justify-content-center mt-5">
                     <div className="col-lg-6 col-md-8">
                         <div className="heading_s1 text-center">
                             <h2>Contact Us</h2>
@@ -18,11 +18,11 @@ const Contact  = () => {
                 </div>
                 <div className="d-flex justify-content-center">
                     <div className="col-lg-4 col-sm-6">
-                        <div className="icon_box_style4 box_shadow1">
-                            <div className="icon">
+                        <div className="icon_box icon_box_style4 box_shadow1">
+                            <div className="icon pt-4">
                                 <i className="ti-location-pin"></i>
                             </div>
-                            <div className="icon_box_content">
+                            <div className="icon_box_content pb-3">
                                 <h5>Location</h5>
                                 <p>Auchi, Edo State, Nigeria</p>
                             </div>
@@ -30,10 +30,10 @@ const Contact  = () => {
                     </div>
                     <div className="col-lg-4 col-sm-6">
                         <div className="icon_box icon_box_style4 box_shadow1">
-                            <div className="icon">
+                            <div className="icon pt-4">
                                 <i className="ti-mobile"></i>
                             </div>
-                            <div className="icon_box_content">
+                            <div className="icon_box_content pb-3">
                                 <h5>Mobile </h5>
                                 <p>+(234) 813 486 6263</p>
                             </div>
@@ -41,10 +41,10 @@ const Contact  = () => {
                     </div>
                     <div className="col-lg-4 col-sm-6">
                         <div className="icon_box icon_box_style4 box_shadow1">
-                            <div className="icon">
+                            <div className="icon pt-4">
                                 <i className="ti-email"></i>
                             </div>
-                            <div className="icon_box_content">
+                            <div className="icon_box_content pb-3">
                                 <h5>Email Address</h5>
                                 <p>estore@gmail.com</p>
                             </div>

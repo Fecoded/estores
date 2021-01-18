@@ -1,4 +1,5 @@
 import React from 'react'
+import {Link} from 'react-router-dom'
 import banner1 from '../../assets/banner.jpg'
 import banner2 from '../../assets/banner2.jpg'
 import banner3 from '../../assets/banner3.jpg'
@@ -15,7 +16,7 @@ const Banner = () => (
                                 <div className="banner_content overflow-hidden">
                                 	<h5 className="mb-3 staggered-animation font-weight-light" data-animation="slideInLeft" data-animation-delay="0.5s">Get up to 50% off Today Only!</h5>
                                     <h2 className="staggered-animation" data-animation="slideInLeft" data-animation-delay="1s">Woman Fashion</h2>
-                                    <a className="btn btn-fill-out rounded-0 staggered-animation text-uppercase" href="shop-left-sidebar.html" data-animation="slideInLeft" data-animation-delay="1.5s">Shop Now</a>
+                                    <Link className="btn btn-fill-out rounded-0 staggered-animation text-uppercase" to='/shops' data-animation="slideInLeft" data-animation-delay="1.5s">Shop Now</Link>
                                 </div>
                             </div>
                         </div>
@@ -30,7 +31,7 @@ const Banner = () => (
                                 <div className="banner_content overflow-hidden">
                                 	<h5 className="mb-3 staggered-animation font-weight-light" data-animation="slideInLeft" data-animation-delay="0.5s">50% off in all products</h5>
                                     <h2 className="staggered-animation" data-animation="slideInLeft" data-animation-delay="1s">Man Fashion</h2>
-                                    <a className="btn btn-fill-out rounded-0 staggered-animation text-uppercase" href="shop-left-sidebar.html" data-animation="slideInLeft" data-animation-delay="1.5s">Shop Now</a>
+                                    <Link className="btn btn-fill-out rounded-0 staggered-animation text-uppercase" to='/shops' data-animation="slideInLeft" data-animation-delay="1.5s">Shop Now</Link>
                                 </div>
                             </div>
                         </div>
@@ -45,7 +46,7 @@ const Banner = () => (
                                 <div className="banner_content overflow-hidden">
                                 	<h5 className="mb-3 staggered-animation font-weight-light" data-animation="slideInLeft" data-animation-delay="0.5s">Taking your Viewing Experience to Next Level</h5>
                                     <h2 className="staggered-animation" data-animation="slideInLeft" data-animation-delay="1s">Summer Sale</h2>
-                                    <a className="btn btn-fill-out rounded-0 staggered-animation text-uppercase" href="shop-left-sidebar.html" data-animation="slideInLeft" data-animation-delay="1.5s">Shop Now</a>
+                                    <Link className="btn btn-fill-out rounded-0 staggered-animation text-uppercase" to='/shops' data-animation="slideInLeft" data-animation-delay="1.5s">Shop Now</Link>
                                 </div>
                             </div>
                         </div>

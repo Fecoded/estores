@@ -1,11 +1,22 @@
-import {START_SPINNER, GET_PRODUCT, GET_PAGINATED_PRODUCT, CREATE_PRODUCT, DELETE_PRODUCT, PRODUCT_ERROR} from './productTypes'
+import {
+    START_SPINNER, 
+    GET_PRODUCT, 
+    GET_PRODUCTS, 
+    GET_PAGINATED_PRODUCT, 
+    FILTER_PRODUCT,
+    CREATE_PRODUCT, 
+    DELETE_PRODUCT, 
+    PRODUCT_ERROR
+} from './productTypes'
 
 const INITIALSTATE = {
     products: [],
     paginated_products: [],
+    product: null,
     totalPages: Number,
     currentPages: Number,
     loading: false,
+    filtered: null,
     error: {},
 }
 
@@ -17,10 +28,16 @@ const ProductReducer = (state = INITIALSTATE, action) => {
               ...state,
               loading: true,
             };
-        case GET_PRODUCT:
+        case GET_PRODUCTS:
             return {
                 ...state,
                 products: payload,
+                loading: false
+            }
+        case GET_PRODUCT:
+            return {
+                ...state,
+                product: payload,
                 loading: false
             }
         case GET_PAGINATED_PRODUCT:
@@ -37,6 +54,19 @@ const ProductReducer = (state = INITIALSTATE, action) => {
                 products: [payload, ...state.products],
                 loading: false
             }
+        case FILTER_PRODUCT:
+            return {
+                ...state,
+                filtered: state.paginated_products.filter((product) => {
+                const regex = new RegExp(`${payload}`, 'gi');
+                return (
+                    product.name.match(regex) ||
+                    product.category.match(regex) ||
+                    product.price.match(regex)
+                );
+                }),
+                loading: false,
+            };
         case DELETE_PRODUCT:
             return {
                 ...state,

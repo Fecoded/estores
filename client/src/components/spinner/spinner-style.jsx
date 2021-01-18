@@ -11,11 +11,17 @@ export const SpinnerOverlay = styled.div`
 `;
 
 export const SpinnerOverlay1 = styled.div`
-  // height: 60vh;
   width: 100%;
   display: flex;
   justify-content: center;
   align-items: center;
+`;
+
+export const SpinnerOverlay2 = styled.div`
+  width: 100%;
+  display: flex;
+  justify-content: left;
+  align-items: left;
 `;
 
 export const SpinnerContainer = styled.div`

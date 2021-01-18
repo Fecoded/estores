@@ -2,10 +2,13 @@ const mongoose = require("mongoose")
 
 const OrdersSchema = new mongoose.Schema({
     user: {
-        type: mongoose.Schema.Types.ObjectId,
-        ref: 'user',
-      },
-    quantity: {
+      type: mongoose.Schema.Types.ObjectId,
+      ref: "user",
+    },
+    img: {
+      type: String,
+    },
+    qty: {
         type: String
     },
     price: {
@@ -13,6 +16,12 @@ const OrdersSchema = new mongoose.Schema({
     },
     name: {
         type: String
+    },
+    address: {
+      type: String
+    },
+    payment_type: {
+      type: String,
     },
     status: {
       type: String,

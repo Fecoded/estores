@@ -1,11 +1,36 @@
-import {START_SPINNER, GET_PRODUCT, GET_PAGINATED_PRODUCT, CREATE_PRODUCT, DELETE_PRODUCT, PRODUCT_ERROR} from './productTypes'
+import {
+    START_SPINNER, 
+    GET_PRODUCT, 
+    GET_PRODUCTS, 
+    GET_PAGINATED_PRODUCT, 
+    FILTER_PRODUCT,
+    CREATE_PRODUCT, 
+    DELETE_PRODUCT, 
+    PRODUCT_ERROR
+} from './productTypes'
 import axios from 'axios'
 import { toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 
-export const getProduct = () => async dispatch => {
+export const getProducts = () => async dispatch => {
     try {
         const res = await axios.get('/api/v1/product/all')
+
+        dispatch({
+            type: GET_PRODUCTS,
+            payload: res.data.data
+        })
+    } catch (err) {
+        dispatch({
+            type: PRODUCT_ERROR,
+            payload: err.response.data.errors,
+          });
+    }
+} 
+
+export const getProduct = (id) => async dispatch => {
+    try {
+        const res = await axios.get(`/api/v1/product/${id}`)
 
         dispatch({
             type: GET_PRODUCT,
@@ -19,9 +44,9 @@ export const getProduct = () => async dispatch => {
     }
 } 
 
-export const getPaginatedProduct = (count) => async dispatch => {
+export const getPaginatedProducts = (count) => async dispatch => {
     try {
-        const res = await axios.get(`/api/v1/product?perPage=6&page=${count || 1}`);
+        const res = await axios.get(`/api/v1/product?perPage=12&page=${count || 1}`);
 
         dispatch({
           type: GET_PAGINATED_PRODUCT,
@@ -128,3 +153,8 @@ export const deleteProduct = (id) => async dispatch => {
           });
     }
 }
+
+// FILTER PRODUCT
+export const filterProduct = (text) => (dispatch) => {
+    dispatch({ type: FILTER_PRODUCT, payload: text });
+  };

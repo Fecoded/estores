@@ -6202,7 +6202,7 @@ label.label_info {
   font-size: 14px;
 }
 .order_complete i {
-  color: #ff324d;
+  color: var(--primary-color);
   font-size: 80px;
   margin-bottom: 20px;
 }

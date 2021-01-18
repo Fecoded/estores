@@ -1,18 +1,18 @@
 import React from 'react';
 
 import Header from '../../components/header/Headers.component'
-import Account from '../../components/account/account.component'
+import CheckOut from '../../components/checkout/checkout.component'
 import Footer from '../../components/footer/Footer.component'
 
 
-const User = () => {
+const CheckOutPage = () => {
   return (
     <div>
      <Header />
-     <Account />
+     <CheckOut />
      <Footer />
     </div>
   );
 };
 
-export default User;
+export default CheckOutPage;

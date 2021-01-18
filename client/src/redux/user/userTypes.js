@@ -1,5 +1,6 @@
 export const START_SPINNER = "START_SPINNER";
 export const USER_LOADED = "USER_LOADED";
+export const GET_USERS = "GET_USERS";
 export const LOGIN_SUCCESS = "LOGIN_SUCCESS";
 export const UPDATE_PROFILE = "UPDATE_PROFILE";
 export const LOGIN_FAIL = "LOGIN_FAIL";

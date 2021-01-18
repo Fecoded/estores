@@ -1,15 +1,22 @@
 import React, { useEffect } from "react";
-import { useDispatch, useSelector } from "react-redux";
+import { useDispatch, useSelector, connect } from "react-redux";
+import {createStructuredSelector} from 'reselect'
 import logo from "../../assets/header-logo.png";
 import { Link } from "react-router-dom";
 
 import { getCategory } from "../../redux/category/categoryActions";
+import { filterProduct } from "../../redux/product/productActions";
+import { selectCartTotal } from '../../redux/cart/cartSelector'
+import { removeItemFromCart } from '../../redux/cart/cartAction'
 
-const Header = () => {
+import {currencyFormat} from '../js/main'
+
+const Header = ({ total }) => {
   const dispatch = useDispatch();
 
   const { categories } = useSelector((state) => state.categoryReducer);
   const { user, isAuthenticated } = useSelector((state) => state.userReducer);
+  const { carts} = useSelector((state) => state.cartReducer);
 
   useEffect(() => {
     dispatch(getCategory());
@@ -83,86 +90,11 @@ const Header = () => {
                             Home
                           </Link>
                         </li>
-
-                        {/* <li className="dropdown dropdown-mega-menu">
-                            <a className="dropdown-toggle nav-link" href="#!" data-toggle="dropdown">Products</a>
-                            <div className="dropdown-menu">
-                                <ul className="mega-menu d-lg-flex">
-                                    <li className="mega-menu-col col-lg-3">
-                                        <ul> 
-                                            <li className="dropdown-header">Woman's</li>
-                                            <li><a className="dropdown-item nav-link nav_item" href="shop-list-left-sidebar.html">Vestibulum sed</a></li>
-                                            <li><a className="dropdown-item nav-link nav_item" href="shop-left-sidebar.html">Donec porttitor</a></li>
-                                            <li><a className="dropdown-item nav-link nav_item" href="shop-right-sidebar.html">Donec vitae facilisis</a></li>
-                                            <li><a className="dropdown-item nav-link nav_item" href="shop-list.html">Curabitur tempus</a></li>
-                                            <li><a className="dropdown-item nav-link nav_item" href="shop-load-more.html">Vivamus in tortor</a></li>
-                                        </ul>
-                                    </li>
-                                    <li className="mega-menu-col col-lg-3">
-                                        <ul>
-                                            <li className="dropdown-header">Men's</li>
-                                            <li><a className="dropdown-item nav-link nav_item" href="shop-cart.html">Donec vitae ante ante</a></li>
-                                            <li><a className="dropdown-item nav-link nav_item" href="checkout.html">Etiam ac rutrum</a></li>
-                                            <li><a className="dropdown-item nav-link nav_item" href="wishlist.html">Quisque condimentum</a></li>
-                                            <li><a className="dropdown-item nav-link nav_item" href="compare.html">Curabitur laoreet</a></li>
-                                            <li><a className="dropdown-item nav-link nav_item" href="order-completed.html">Vivamus in tortor</a></li>
-                                        </ul>
-                                    </li>
-                                    <li className="mega-menu-col col-lg-3">
-                                        <ul>
-                                            <li className="dropdown-header">Kid's</li>
-                                            <li><a className="dropdown-item nav-link nav_item" href="shop-product-detail.html">Donec vitae facilisis</a></li>
-                                            <li><a className="dropdown-item nav-link nav_item" href="shop-product-detail-left-sidebar.html">Quisque condimentum</a></li>
-                                            <li><a className="dropdown-item nav-link nav_item" href="shop-product-detail-right-sidebar.html">Etiam ac rutrum</a></li>
-                                            <li><a className="dropdown-item nav-link nav_item" href="shop-product-detail-thumbnails-left.html">Donec vitae ante ante</a></li>
-                                            <li><a className="dropdown-item nav-link nav_item" href="shop-product-detail-thumbnails-left.html">Donec porttitor</a></li>
-                                        </ul>
-                                    </li>
-                                    <li className="mega-menu-col col-lg-3">
-                                        <ul>
-                                            <li className="dropdown-header">Accessories</li>
-                                            <li><a className="dropdown-item nav-link nav_item" href="shop-product-detail.html">Donec vitae facilisis</a></li>
-                                            <li><a className="dropdown-item nav-link nav_item" href="shop-product-detail-left-sidebar.html">Quisque condimentum</a></li>
-                                            <li><a className="dropdown-item nav-link nav_item" href="shop-product-detail-right-sidebar.html">Etiam ac rutrum</a></li>
-                                            <li><a className="dropdown-item nav-link nav_item" href="shop-product-detail-thumbnails-left.html">Donec vitae ante ante</a></li>
-                                            <li><a className="dropdown-item nav-link nav_item" href="shop-product-detail-thumbnails-left.html">Donec porttitor</a></li>
-                                        </ul>
-                                    </li>
-                                </ul>
-                                <div className="d-lg-flex menu_banners">
-                                    <div className="col-sm-4">
-                                        <div className="header-banner">
-                                            <img src="assets/images/menu_banner1.jpg" alt="menu_banner1"/>
-                                            <div className="banne_info">
-                                                <h6>10% Off</h6>
-                                                <h4>New Arrival</h4>
-                                                <a href="#!">Shop now</a>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div className="col-sm-4">
-                                        <div className="header-banner">
-                                            <img src="assets/images/menu_banner2.jpg" alt="menu_banner2"/>
-                                            <div className="banne_info">
-                                                <h6>15% Off</h6>
-                                                <h4>Men's Fashion</h4>
-                                                <a href="#!">Shop now</a>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div className="col-sm-4">
-                                        <div className="header-banner">
-                                            <img src="assets/images/menu_banner3.jpg" alt="menu_banner3"/>
-                                            <div className="banne_info">
-                                                <h6>23% Off</h6>
-                                                <h4>Kids Fashion</h4>
-                                                <a href="#!">Shop now</a>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </li> */}
+                        <li className="dropdown">
+                          <Link className="nav-link" to="/shops">
+                            Shops
+                          </Link>
+                        </li>
 
                         <li>
                           <Link className="nav-link nav_item" to="/contact">
@@ -173,81 +105,70 @@ const Header = () => {
                     </div>
                     <ul className="navbar-nav attr-nav align-items-center">
                       <li className="dropdown cart_dropdown">
+                        
                         <a
                           className="nav-link cart_trigger"
                           href="#!"
                           data-toggle="dropdown"
                         >
-                          <i className="linearicons-cart"></i>
-                          <span className="cart_count">2</span>
+                            <i className="linearicons-cart"></i>
+                          {carts.length !== 0 && 
+                            <span className="cart_count">{carts.length}</span>
+                          }
                         </a>
                         <div className="cart_box dropdown-menu dropdown-menu-right">
                           <ul className="cart_list">
-                            <li>
-                              <a href="#!" className="item_remove">
-                                <i className="ion-close"></i>
-                              </a>
-                              <a href="#!">
-                                <img
-                                  src="assets/images/cart_thamb1.jpg"
-                                  alt="cart_thumb1"
-                                />
-                                Variable product 001
-                              </a>
-                              <span className="cart_quantity">
-                                {" "}
-                                1 x{" "}
-                                <span className="cart_amount">
-                                  {" "}
-                                  <span className="price_symbole">$</span>
-                                </span>
-                                78.00
-                              </span>
-                            </li>
-                            <li>
-                              <a href="#!" className="item_remove">
-                                <i className="ion-close"></i>
-                              </a>
-                              <a href="#!">
-                                <img
-                                  src="assets/images/cart_thamb2.jpg"
-                                  alt="cart_thumb2"
-                                />
-                                Ornare sed consequat
-                              </a>
-                              <span className="cart_quantity">
-                                {" "}
-                                1 x{" "}
-                                <span className="cart_amount">
-                                  {" "}
-                                  <span className="price_symbole">$</span>
-                                </span>
-                                81.00
-                              </span>
-                            </li>
+                            {carts.length > 0 ? (
+                              carts.map((cart) => (
+                                <li key={cart._id}>
+                                  {/* <a href="#!" className="item_remove">
+                                    <i className="ion-close"></i>
+                                  </a> */}
+                                  <a href="#!" className="item_remove" onClick={() => dispatch(removeItemFromCart(cart._id))}><i className="ion-close"></i></a>
+                                  <a href="#!">
+                                    <img
+                                      src={cart.img}
+                                      alt="img"
+                                    />
+                                    {cart.name}
+                                  </a>
+                                  <span className="cart_quantity">
+                                    {" "}
+                                    {cart.qty} x {" "}
+                                    <span className="cart_amount">
+                                      {" "}
+                                      <span className="price_symbole">{currencyFormat(+cart.price)}</span>
+                                    </span>
+                                  </span>
+                                </li>
+
+                              ))
+
+                            ) : (
+                              <li className="text-center">No item in your cart</li>
+                            )}
                           </ul>
                           <div className="cart_footer">
                             <p className="cart_total">
                               <strong>Subtotal:</strong>{" "}
                               <span className="cart_price">
                                 {" "}
-                                <span className="price_symbole">$</span>
+                                <span className="price_symbole">{currencyFormat(+total)}</span>
                               </span>
-                              159.00
                             </p>
                             <p className="cart_buttons">
-                              <a
-                                href="#!"
+                              <Link
+                                to="/cart"
                                 className="btn btn-fill-line rounded-0 view-cart"
                               >
                                 View Cart
-                              </a>
-                              <a
-                                href="#!"
+                              </Link>
+                              <Link
+                                to="/checkout"
                                 className="btn btn-fill-out rounded-0 checkout"
                               >
                                 Checkout
-                              </a>
+                              </Link>
                             </p>
                           </div>
                         </div>
@@ -257,16 +178,16 @@ const Header = () => {
                 </div>
               </div>
             </div>
-            <div className="product_search_form">
+            <div className="product_search_form radius_input">
               <form>
                 <div className="input-group">
                   <div className="input-group-prepend">
                     <div className="custom_select">
-                      <select className="first_null">
+                      <select className="first_null" onChange={(e) => dispatch(filterProduct(e.target.value))}>
                         <option value="">All Category</option>
                         {categories.length > 0
                           ? categories.map((category) => (
-                              <option key={category._id} value={category._id}>
+                              <option key={category._id} value={category.name}>
                                 {category.description}
                               </option>
                             ))
@@ -276,9 +197,9 @@ const Header = () => {
                   </div>
                   <input
                     className="form-control"
-                    placeholder="Search Product..."
-                    required=""
+                    placeholder="Search EvStores..."
                     type="text"
+                    onChange={(e) => dispatch(filterProduct(e.target.value))}
                   />
                   <button type="submit" className="search_btn">
                     <i className="linearicons-magnifier"></i>
@@ -286,6 +207,7 @@ const Header = () => {
                 </div>
               </form>
             </div>
+
           </div>
         </div>
       </div>
@@ -293,4 +215,8 @@ const Header = () => {
   );
 };
 
-export default Header;
+const mapStateToProps = createStructuredSelector({
+  total: selectCartTotal
+})
+
+export default connect(mapStateToProps)(Header);
