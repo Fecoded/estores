@@ -17,6 +17,12 @@ const OrdersSchema = new mongoose.Schema({
     name: {
         type: String
     },
+    size: {
+      type: String,      
+    },
+    color: {
+      type: String,
+    },
     address: {
       type: String
     },

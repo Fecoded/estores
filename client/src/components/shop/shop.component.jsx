@@ -30,7 +30,7 @@ const Shop = ({getPaginatedProducts, paginated_products, totalPages, currentPage
                       <div key={product._id} className="col-lg-3 col-md-4 col-6 grid_item">
                       <div className="product">
                          <div className="product_img">
-                            <img src={product.img} alt="img" />
+                            <img src={product.img} alt="img" className="img_product"  />
                                   <div className="product_action_box">
                                   <ul className="list_none pr_action_btn">
                                   <li className="add-to-cart">

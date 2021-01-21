@@ -70,6 +70,7 @@ export const createProduct = ({
     description,
     category,
     size,
+    color,
     type,
     quantity,
     inputRef,
@@ -80,6 +81,7 @@ export const createProduct = ({
     setCategory,
     setDescription,
     setSize,
+    setColor,
     setQuantity,
     setType
 }) => async dispatch => {
@@ -99,6 +101,7 @@ export const createProduct = ({
         formData.append('description', description);
         formData.append('category', category);
         formData.append('size', size);
+        formData.append('color', color);
         formData.append('type', type);
         formData.append('quantity', quantity);
 
@@ -119,6 +122,7 @@ export const createProduct = ({
         setCategory('');
         setDescription('');
         setSize('');
+        setColor('');
         setQuantity('');
         setType('');
    

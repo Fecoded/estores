@@ -24,7 +24,7 @@ const Contact  = () => {
                             </div>
                             <div className="icon_box_content pb-3">
                                 <h5>Location</h5>
-                                <p>Auchi, Edo State, Nigeria</p>
+                                <p>Benin City, Edo State, Nigeria</p>
                             </div>
                         </div>
                     </div>
@@ -46,7 +46,7 @@ const Contact  = () => {
                             </div>
                             <div className="icon_box_content pb-3">
                                 <h5>Email Address</h5>
-                                <p>estore@gmail.com</p>
+                                <p>Eronsval001@gmail.com</p>
                             </div>
                         </div>
                     </div>

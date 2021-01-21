@@ -8,7 +8,7 @@ import {addItem, removeItem, removeItemFromCart} from '../../redux/cart/cartActi
 import {currencyFormat} from '../js/main'
 
 const Cart = ({ carts, total }) => {
-    const [quantity, setQuantity] = useState(0);
+    const [setQuantity] = useState(0);
 
     const dispatch = useDispatch()
 

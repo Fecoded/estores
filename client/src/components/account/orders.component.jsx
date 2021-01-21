@@ -26,6 +26,8 @@ const Orders = () => {
                                     <th>Full Name</th>
                                     <th>Product Name</th>
                                     <th>Price</th>
+                                    <th>Size</th>
+                                    <th>Color</th>
                                     <th>Quantity</th>
                                     <th>Total</th>
                                     <th>Address</th>

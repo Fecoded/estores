@@ -103,6 +103,8 @@ const UserAccount = () => {
                                                         <th>Product Name</th>
                                                         <th>Price</th>
                                                         <th>Quantity</th>
+                                                        <th>Size</th>
+                                                        <th>Color</th>
                                                         <th>Total</th>
                                                         <th>Date</th>
                                                         <th>Status</th>
@@ -115,6 +117,8 @@ const UserAccount = () => {
                                                             <td>{ord.name}</td>
                                                             <td>{currencyFormat(+ord.price)}</td>
                                                             <td>{ord.qty}</td>
+                                                            <td>{ord.size}</td>
+                                                            <td>{ord.color}</td>
                                                             <td>{currencyFormat(+ord.price * +ord.qty)}</td>
                                                             <td>{moment(ord.createdAt).format("DD-MM-YYYY")}</td>
                                                             <td>{ord.status}</td>

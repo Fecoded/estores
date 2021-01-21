@@ -97,6 +97,7 @@ exports.postProduct = async (req, res, next) =>
           description,
           category,
           size,
+          color,
           type,
           quantity,
         } = req.body;
@@ -111,6 +112,7 @@ exports.postProduct = async (req, res, next) =>
         if (description) productFields.description = description;
         if (category) productFields.category = category;
         if (size) productFields.size = size;
+        if (color) productFields.color = color;
         if (type) productFields.type = type;
         if (quantity) productFields.quantity = quantity;
 
@@ -158,6 +160,7 @@ exports.updateProduct = async (req, res, next) => {
     description,
     category,
     size,
+    color,
     type,
     quantity,
   } = req.body;
@@ -169,6 +172,7 @@ exports.updateProduct = async (req, res, next) => {
     description,
     category,
     size,
+    color,
     type,
     quantity,
   };

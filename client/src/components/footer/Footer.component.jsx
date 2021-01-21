@@ -56,7 +56,7 @@ const Footer = () =>{
                 <div className="col-lg-2 col-md-3 col-sm-6">
                 	<div className="widget">
                         <h6 className="widget_title">Category</h6>
-                        {categories.map((category) => (
+                        {categories.filter((data, idx) => idx < 5).map((category) => (
                             <ul key={category._id} className="widget_links">
                                 <li><a href="#!">{category.description}</a></li>
                             </ul>
@@ -80,11 +80,11 @@ const Footer = () =>{
                         <ul className="contact_info contact_info_light">
                             <li>
                                 <i className="ti-location-pin"></i>
-                                <p>Auchi, Edo State, Nigeria</p>
+                                <p>Benin City, Edo State, Nigeria</p>
                             </li>
                             <li>
                                 <i className="ti-email"></i>
-                                <a href="mailto:info@sitename.com">info@estores.com</a>
+                                <a href="mailto:Eronsval001@gmail.com">Eronsval001@gmail.com</a>
                             </li>
                             <li>
                                 <i className="ti-mobile"></i>

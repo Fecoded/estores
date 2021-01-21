@@ -2,6 +2,7 @@ import React, {Fragment, useEffect, useState, useRef} from 'react'
 import {Link} from 'react-router-dom'
 import {useDispatch, useSelector} from 'react-redux'
 import moment from 'moment'
+import swal from 'sweetalert';
 
 import {logout} from '../../redux/user/userActions'
 import {createCategory, deleteCategory} from '../../redux/category/categoryActions'
@@ -21,6 +22,7 @@ const AdminAccount = () => {
     const [previous_price, setPreviousPrice] = useState(0)
     const [category, setCategory] = useState('')
     const [size, setSize] = useState('')
+    const [color, setColor] = useState('')
     const [type, setType] = useState('')
     const [quantity, setQuantity] = useState(0)
 
@@ -54,6 +56,7 @@ const AdminAccount = () => {
             description,
             category,
             size,
+            color,
             type,
             quantity,
             inputRef,
@@ -64,13 +67,34 @@ const AdminAccount = () => {
             setCategory,
             setDescription,
             setSize,
+            setColor,
             setQuantity,
             setType
         }
         ))
     }
 
-    return (
+    const onDelete = (product) => {
+        swal({
+            text: `Are you sure you want to delete ${product.name}?`,
+            icon: 'info',
+            buttons: true,
+            dangerMode: true,
+            }).then((result) => {
+            if (result)  {dispatch(deleteProduct(product._id))}
+          })}
+    
+    const onDeleteCategory = (category) => {
+        swal({
+            text: `Are you sure you want to delete ${category.description}?`,
+            icon: 'info',
+            buttons: true,
+            dangerMode: true,
+            }).then((result) => {
+            if (result)   dispatch(deleteCategory(category._id))
+          })}
+       
+   return (
         <Fragment>
                 <div className="main-content">
                     <div className="section">
@@ -194,6 +218,7 @@ const AdminAccount = () => {
                                                         ref={inputRef}
                                                         onChange={(e) => setFile(e.target.files[0])}
                                                         />
+                                                        <span>Image should not be more than 500kb</span>
                                                 </div>
                                                 <div className="form-group col-md-6">
                                                     <label>Size <span className="required">*</span></label>
@@ -204,6 +229,17 @@ const AdminAccount = () => {
                                                         type="text"
                                                         value={size}
                                                         onChange={(e) => setSize(e.target.value)}
+                                                        />
+                                                </div>
+                                                <div className="form-group col-md-6">
+                                                    <label>Color <span className="required">*</span></label>
+                                                    <input 
+                                                        required
+                                                        className="form-control" 
+                                                        name="size" 
+                                                        type="text"
+                                                        value={color}
+                                                        onChange={(e) => setColor(e.target.value)}
                                                         />
                                                 </div>
                                                 <div className="form-group col-md-6">
@@ -276,6 +312,7 @@ const AdminAccount = () => {
                                                         <th>Description</th>
                                                         <th>Category</th>
                                                         <th>Size</th>
+                                                        <th>Color</th>
                                                         <th>Type</th>
                                                         <th>Quantity</th>
                                                         <th>Date</th>
@@ -292,11 +329,12 @@ const AdminAccount = () => {
                                                             <td>{product.description}</td>
                                                             <td>{product.category}</td>
                                                             <td>{product.size}</td>
+                                                            <td>{product.color}</td>
                                                             <td>{product.type}</td>
                                                             <td>{product.quantity}</td>
                                                             <td>{moment(product.createdAt).format("DD/MM/YYYY")}</td>
                                                            
-                                                            <td><i className="ti-trash cursor-pointer" onClick={() => dispatch(deleteProduct(product._id))}></i></td>
+                                                            <td><i className="ti-trash cursor-pointer" onClick={() => onDelete(product)}></i></td>
                                                         </tr>
 
                                                     ))}
@@ -362,7 +400,7 @@ const AdminAccount = () => {
                                                         <tr key={category._id}>
                                                             <td>{category.description}</td>
                                                             <td>{moment(category.createdAt).format("DD/MM/YYYY")}</td>
-                                                            <td><i className="ti-trash cursor-pointer" onClick={() => dispatch(deleteCategory(category._id))}></i></td>
+                                                            <td><i className="ti-trash cursor-pointer" onClick={() => onDeleteCategory(category)}></i></td>
                                                         </tr>
 
                                                     ))}

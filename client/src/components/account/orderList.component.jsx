@@ -36,6 +36,8 @@ const OrderList = ({ users, order, deleteOrder, updateOrder }) => {
                     <td>{`${user.firstName} ${user.lastName}`}</td>
                     <td>{order.name}</td>
                     <td>{currencyFormat(+order.price)}</td>
+                    <td>{order.size}</td>
+                    <td>{order.color}</td>
                     <td>{order.qty}</td>
                     <td>{currencyFormat(+order.price * +order.qty)}</td>
                     <td>{order.address}</td>

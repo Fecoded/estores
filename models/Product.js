@@ -27,6 +27,9 @@ const ProductSchema = mongoose.Schema({
   size: {
     type: String,
   },
+  color: {
+    type: String,
+  },
   type: {
     type: String,
     emun: ["Featured", "Exculsive"],

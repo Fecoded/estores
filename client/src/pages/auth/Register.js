@@ -138,7 +138,7 @@ const Register = () => {
                       </button>
                     </div>
                   </form>
-                  <div className="different_login">
+                  {/* <div className="different_login">
                     <span> or</span>
                   </div>
                   <ul className="btn-login list_none text-center">
@@ -151,7 +151,7 @@ const Register = () => {
                         Google
                       </a>
                     </li>
-                  </ul>
+                  </ul> */}
                   <div className="form-note text-center">
                     Already have an account? <Link to="/login">Log in</Link>
                   </div>

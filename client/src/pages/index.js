@@ -11,21 +11,23 @@ import { SpinnerOne } from "../components/spinner/spinner-component";
 import PrivateRouteUser from '../components/routing/PrivateRouteUser'
 import { loadUser } from "../redux/user/userActions";
 
-const Login = lazy(() => import("./auth/Login"));
-const Register = lazy(() => import("./auth/Register"));
+import NotFoundPage from './NotFound/NotFound'
+import Login from './auth/Login'
+import Register from './auth/Register'
+import ContactPage from './contact/contact'
+import CheckOutPage from './checkout/CheckOutPage'
+import CompletedPage from './checkout/CompletedPage'
+import ForgotPassword from './auth/ForgotPassword'
+import ResetPassword from './auth/ResetPassword'
+
 const HomePage = lazy(() => import("./home/homePage"));
 const ProductDetails = lazy(() => import("./product/product"));
 const ShopPage = lazy(() => import("./shop/Shop"));
-const ContactPage = lazy(() => import('./contact/contact'))
 const CartPage = lazy(() => import('./cart/CartPage'))
-const CheckOutPage = lazy(() => import('./checkout/CheckOutPage'))
-const CompletedPage = lazy(() => import('./checkout/CompletedPage'))
 
 const User = lazy(() => import('./account/User'))
 const Admin = lazy(() => import('./account/Admin'))
 
-// Admin
-const AdminLogin = lazy(() => import("./auth/AdminLogin"));
 
 const Routes = ({ user: { isAuthenticated, user }, loadUser }) =>{
   useEffect(() => {
@@ -34,9 +36,9 @@ const Routes = ({ user: { isAuthenticated, user }, loadUser }) =>{
 
   return  (
   <Fragment>
-    <Switch>
-      <ErrorHandler>
+     <ErrorHandler>
         <Suspense fallback={<SpinnerOne />}>
+        <Switch>
           <Route exact path="/" component={HomePage} />
           <Route
             exact
@@ -58,25 +60,19 @@ const Routes = ({ user: { isAuthenticated, user }, loadUser }) =>{
           <Route exact path="/cart" component={CartPage} />
           <Route exact path="/checkout" component={CheckOutPage} />
           <Route exact path="/complete" component={CompletedPage} />
-          <Route
-            exact
-            path="/admin/login"
-            render={() =>
-              isAuthenticated && user ? (
-                <Redirect to="/account" />
-              ) : (
-                <AdminLogin />
-              )
-            }
-          />
+          <Route exact path="/forgotpassword" component={ForgotPassword} />
+          <Route exact path="/resetpassword" component={ResetPassword} />
+         
           {user && user.role === 'user' ? (
             <PrivateRouteUser exact path="/account" component={User}/>
-          ) : (
-            <PrivateRouteUser exact path="/account" component={Admin}/>
-          )}
+            ) : (
+              <PrivateRouteUser exact path="/account" component={Admin}/>
+              )}
+              
+           <Route component={NotFoundPage} />
+        </Switch>
         </Suspense>
-      </ErrorHandler>
-    </Switch>
+    </ErrorHandler>
   </Fragment>
 )};
 
