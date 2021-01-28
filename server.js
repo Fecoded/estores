@@ -52,3 +52,9 @@ const PORT = process.env.PORT || 4000;
 app.listen(PORT, () =>
   console.log(`Server started on ${process.env.NODE_ENV} mode on port ${PORT}`)
 );
+
+
+// Service Worker
+// app.get('/service-worker.js', (req, res) => {
+//   res.sendFile(path.solve(__dirname, 'client', 'build', 'service-worker.js'));
+// });
