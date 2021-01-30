@@ -19,7 +19,7 @@ const Footer = () =>{
                         <div className="footer_logo s-50">
                             <a  href="#!"><img src={logo} alt="logo"/></a>
                         </div>
-                        <p>If you are going to use of Lorem Ipsum need to be sure there isn't hidden of text</p>
+                        <p>We are at your service 24/7, all kinds of products - Givenchy, Gucci, Prada etc. Evstores gat you cover</p>
                     </div>
                     <div className="widget">
                         <ul className="social_icons social_white">
@@ -100,7 +100,7 @@ const Footer = () =>{
         <div className="container">
             <div className="row">
                 <div className="col-md-6">
-                    <p className="mb-md-0 text-center text-md-left">© 2020 All Rights Reserved by Fecoded</p>
+                    <p className="mb-md-0 text-center text-md-left">© 2021 All Rights Reserved by Fecoded Tech..</p>
                 </div>
              
             </div>
