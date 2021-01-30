@@ -1,21 +1,32 @@
 import React, { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
+import { useHistory, withRouter } from 'react-router-dom'
 
 import logo from "../../assets/logo.png";
 
-import { login } from "../../redux/user/userActions";
+import {changePassword} from '../../redux/forgotpassword/forgotpassword.action'
 import { SpinnerTwo } from "../../components/spinner/spinner-component";
 
-const ResetPassword = () => {
+import { toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
+
+const ResetPassword = ({ match }) => {
   const [password, setPassword] = useState("");
   const [confirmpassword, setConfirmPassword] = useState("");
 
   const dispatch = useDispatch();
   const { loading } = useSelector((state) => state.userReducer);
 
+  const { token } = match.params;
+  const history = useHistory()
+
   const onSubmit = (e) => {
     e.preventDefault();
-    dispatch(login({ password }));
+    if(password === confirmpassword) {
+      dispatch(changePassword({ password, token, history }));
+    } else {
+      toast.error(`❤️ password does not match, try again`);
+    }
   };
 
   return (
@@ -38,6 +49,7 @@ const ResetPassword = () => {
                         name="password"
                         placeholder="Password"
                         value={password}
+                        minLength="6"
                         onChange={(e) => setPassword(e.target.value)}
                       />
                     </div>
@@ -49,6 +61,7 @@ const ResetPassword = () => {
                         name="confirmpassword"
                         placeholder="Confirm Password"
                         value={confirmpassword}
+                        minLength="6"
                         onChange={(e) => setConfirmPassword(e.target.value)}
                       />
                     </div>
@@ -76,4 +89,4 @@ const ResetPassword = () => {
   );
 };
 
-export default ResetPassword;
+export default  withRouter(ResetPassword);

@@ -50,8 +50,8 @@ export const createOrder = (formData, history) => async dispatch => {
             payload: res.data.data
         })
     
-        history.push("/complete")
-        dispatch(clearCart())
+        history.push("/complete");
+        dispatch(clearCart());
         
     } catch (err) {
         dispatch({

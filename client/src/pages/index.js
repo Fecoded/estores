@@ -54,6 +54,7 @@ const Routes = ({ user: { isAuthenticated, user }, loadUser }) =>{
               isAuthenticated && user ? <Redirect to="/" /> : <Register />
             }
           />
+          <Route exact  path="/resetpassword/:token" component={ResetPassword} />
           <Route exact path="/:id/:productname" component={ProductDetails} />
           <Route exact path="/shops" component={ShopPage} />
           <Route exact path="/contact" component={ContactPage} />
@@ -61,7 +62,6 @@ const Routes = ({ user: { isAuthenticated, user }, loadUser }) =>{
           <Route exact path="/checkout" component={CheckOutPage} />
           <Route exact path="/complete" component={CompletedPage} />
           <Route exact path="/forgotpassword" component={ForgotPassword} />
-          <Route exact path="/resetpassword" component={ResetPassword} />
          
           {user && user.role === 'user' ? (
             <PrivateRouteUser exact path="/account" component={User}/>

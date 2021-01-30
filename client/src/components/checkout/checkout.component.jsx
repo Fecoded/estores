@@ -23,8 +23,8 @@ const CheckOut = ({ total }) => {
     const {carts} =  useSelector((state) => state.cartReducer)
     const {user, isAuthenticated} =  useSelector((state) => state.userReducer)
 
-    const dispatch = useDispatch()
-    const history = useHistory()
+    const dispatch = useDispatch();
+    const history = useHistory();
 
     const onSubmit = (e) => {
         e.preventDefault();

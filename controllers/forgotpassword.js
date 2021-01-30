@@ -42,7 +42,7 @@ exports.postForgotPassword = async (req, res, next) => {
       text:
         'You are receiving this because you (or someone else) have requested the reset of the password for your account.\n\n' +
         'Please click on the following link, or paste this into your browser to complete the process:\n\n' +
-        `http://ssgb.afwin.org/resetpassword/${token}` +
+        `http://localhost:3000/resetpassword/${token}` +
         '\n\n' +
         'If you did not request this, please ignore this email and your password will remain unchanged.\n',
     };
@@ -52,7 +52,7 @@ exports.postForgotPassword = async (req, res, next) => {
       }
       return res.json({
         success: true,
-        msg: 'Email has been Sent, Please check your email',
+        msg: 'A reset link has been sent to your email address',
       });
     });
   } catch (err) {
@@ -86,7 +86,7 @@ exports.updateForgotPassword = async (req, res, next) => {
         if (err) return;
         User.findOneAndUpdate({ _id: user.id }, { password: hash })
           .then(() =>
-            res.json({ success: true, msg: 'Password changed Successfully' })
+            res.json({ success: true, msg: 'Password changed Successfully, Please login' })
           )
           .catch((err) => res.status(500).json('Server Error'));
       });

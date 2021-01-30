@@ -4,7 +4,7 @@ import {Link} from 'react-router-dom'
 
 import logo from "../../assets/logo.png";
 
-import { login } from "../../redux/user/userActions";
+import {checkEmail} from '../../redux/forgotpassword/forgotpassword.action'
 import { SpinnerTwo } from "../../components/spinner/spinner-component";
 
 const ForgotPassword = () => {
@@ -15,7 +15,7 @@ const ForgotPassword = () => {
 
   const onSubmit = (e) => {
     e.preventDefault();
-    dispatch(login({ email }));
+    dispatch(checkEmail({ email }));
   };
 
   return (
@@ -37,7 +37,7 @@ const ForgotPassword = () => {
                         className="form-control"
                         value={email}
                         name="email"
-                        placeholder="Your Email"
+                        placeholder="Email Address"
                         onChange={(e) => setEmail(e.target.value)}
                       />
                     </div>
