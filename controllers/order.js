@@ -57,7 +57,6 @@ exports.getAllOrder = async (req, res, next) => {
        }
 
         order = await Order.create(newArr);
-        console.log(order)
     
         res.status(201).json({ success: true, data: order });
      } catch (err) {

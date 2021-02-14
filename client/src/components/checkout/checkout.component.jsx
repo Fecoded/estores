@@ -5,6 +5,7 @@ import {createStructuredSelector} from 'reselect'
 import {selectCartTotal} from '../../redux/cart/cartSelector'
 import {updateProfile} from '../../redux/user/userActions'
 import {createOrder} from '../../redux/order/orderAction'
+import {updateQuantity} from '../../redux/product/productActions'
 
 import {currencyFormat} from '../js/main'
 import { toast } from "react-toastify";
@@ -45,6 +46,8 @@ const CheckOut = ({ total }) => {
         }
     },[user]);
 
+    let product = carts.map((cart) => ({ _id: cart._id, qty: cart.qty }))
+
     const onOrder = () => {
         if(user && isAuthenticated) {
             if(user.shipping_address !== ""){
@@ -55,7 +58,11 @@ const CheckOut = ({ total }) => {
                 }
                 let newCart = arr.map(addDetails);
              
-                dispatch(createOrder(newCart, history))
+                dispatch(createOrder(newCart, history));
+
+                product.map((product) => (
+                    dispatch(updateQuantity({ product }))
+                ))
             } else {
                 toast.error(`❤️ Please complete your profile, to continue order`)
             }

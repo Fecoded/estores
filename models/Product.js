@@ -15,6 +15,7 @@ const ProductSchema = mongoose.Schema({
   },
   previous_price: {
     type: String,
+    default: "0"
   },
   description: {
     type: String,

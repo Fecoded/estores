@@ -14,6 +14,7 @@ const ExclusiveList = ({ product }) => {
         
         <div className="col-lg-3 col-md-4 col-6 grid_item">
             <div className="product">
+             {product.quantity === "0" && <span className="pr_flash bg-danger">Sold Out</span>}
                <div className="product_img">
                             <img src={product.img} alt="img" className="img_product"  />
                         <div className="product_action_box">

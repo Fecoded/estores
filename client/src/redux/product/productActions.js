@@ -4,6 +4,7 @@ import {
     GET_PRODUCTS, 
     GET_PAGINATED_PRODUCT, 
     FILTER_PRODUCT,
+    UPDATE_QUANTITY,
     CREATE_PRODUCT, 
     DELETE_PRODUCT, 
     PRODUCT_ERROR
@@ -141,6 +142,17 @@ export const createProduct = ({
         });
     }
 }
+
+export const updateQuantity = (product) => dispatch => {
+    try {   
+      const res = axios.put(`/api/v1/product/quantity`, product);
+      
+      dispatch({ type: UPDATE_QUANTITY, payload: res.data.data })
+    } catch (err) {
+      dispatch({ type: PRODUCT_ERROR });
+    }
+  }
+  
 
 export const deleteProduct = (id) => async dispatch => {
     try {

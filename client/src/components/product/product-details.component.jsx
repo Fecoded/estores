@@ -26,6 +26,7 @@ const ProductDetail = ({ match }) => {
         <div className="container">
           <div className="row">
             <div className="col-lg-6 col-md-6 mb-4 mb-md-0">
+            {product && product.quantity === "0" && <span className="pr_flash bg-danger ml-3">Sold Out</span>}
               <div className="product-image">
               {product ? (
                 <div className="product_img_box">
@@ -43,13 +44,15 @@ const ProductDetail = ({ match }) => {
               <div className="pr_detail">
                   {product ? (
                 <div className="product_description">
+                  <div>
                     <h4 className="product_title">
                       {product.name}
                     </h4>
               
-                  <div className="product_price">
-                      <span className="price">{currencyFormat(+product.price)}</span>
-                      <del>{product.previous_price !== '0' && currencyFormat(+product.previous_price)}</del>
+                    <div className="product_price">
+                        <span className="price">{currencyFormat(+product.price)}</span>
+                        <del>{product.previous_price !== '0' && currencyFormat(+product.previous_price)}</del>
+                    </div>
                   </div>
                   
                   <div className="pr_desc">
@@ -96,12 +99,23 @@ const ProductDetail = ({ match }) => {
                   </div>
                 </div> */}
                   <div className="cart_btn mt-4">
-                    <button
+                    {product && product.quantity === "0" ? (
+                      <button
+                        className="btn btn-fill-out btn-addtocart"
+                        type="button" onClick={() => dispatch(addItemToCart(product))}
+                        disabled
+                      >
+                        <i className="icon-basket-loaded"></i> Add to cart
+                      </button>
+
+                    ) : (
+                      <button
                       className="btn btn-fill-out btn-addtocart"
                       type="button" onClick={() => dispatch(addItemToCart(product))}
                     >
                       <i className="icon-basket-loaded"></i> Add to cart
                     </button>
+                    )}
               
                   </div>
                 <hr />

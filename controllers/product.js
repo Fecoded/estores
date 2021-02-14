@@ -102,8 +102,6 @@ exports.postProduct = async (req, res, next) =>
           quantity,
         } = req.body;
 
-        console.log(req.body)
-
         const productFields = {};
         productFields.user = req.user.id;
         if (name) productFields.name = name;
@@ -192,6 +190,42 @@ exports.updateProduct = async (req, res, next) => {
     });
   }
 };
+
+// @desc    UPDATE PRODUCT QUANTITY
+// @routes  UPDATE api/v1/product/quantity/:id
+// @access  Private
+exports.updateQuantity = async (req, res, next) => {
+   try {
+     const { product } = req.body;
+
+    let pro = await Product.findById(product._id);
+
+    if(!pro){
+      return res.status(400).json({ msg: `Product with ${req.params.id} Id does not exist` });
+    }
+
+
+    product.qty = pro.quantity - +product.qty
+
+    const newExp = {
+      quantity: product.qty,
+    };
+
+    let productQty = await Product.updateMany(
+      { _id: product._id },
+      { $set: newExp },
+    );
+
+    return res.status(200).json({ success: true, data: productQty });
+  } catch (err) {
+    console.log(err)
+    return res.status(500).json({
+      success: false,
+      error: 'Server Error',
+    });
+  }
+};
+
 
 // @desc    DELETE PRODUCT
 // @route   DELETE /api/v1/product/:id

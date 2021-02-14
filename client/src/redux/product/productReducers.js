@@ -4,6 +4,7 @@ import {
     GET_PRODUCTS, 
     GET_PAGINATED_PRODUCT, 
     FILTER_PRODUCT,
+    UPDATE_QUANTITY,
     CREATE_PRODUCT, 
     DELETE_PRODUCT, 
     PRODUCT_ERROR
@@ -52,6 +53,12 @@ const ProductReducer = (state = INITIALSTATE, action) => {
             return {
                 ...state,
                 products: [payload, ...state.products],
+                loading: false
+            }
+        case UPDATE_QUANTITY:
+            return {
+                ...state,
+                products: state.products.map((product) => product._id === payload._id ? payload : product),
                 loading: false
             }
         case FILTER_PRODUCT:

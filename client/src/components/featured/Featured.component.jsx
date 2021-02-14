@@ -13,8 +13,8 @@ const FeaturedItem = ({ getProducts, products, heading, container, section }) =>
   const featuredProducts = products.filter((product) => product.type === "Featured");
 
   return (
-    <div className={section !== 'none' && "section"}>
-      <div className={container !== "none" && 'container'}>
+    <div className={`${section !== 'none' && "section"}`}>
+      <div className={`${container !== "none" && 'container'}`}>
         <div className="row justify-content-center">
           <div className="col-md-6">
             <div className="heading_s1 text-center">
@@ -27,7 +27,7 @@ const FeaturedItem = ({ getProducts, products, heading, container, section }) =>
           {products.length > 0 ? (
             <div className="row shop_container loadmore">
                 {featuredProducts.filter((product, idx) => idx < 4).map((product) => (
-                  <FeaturedList key={product._id} product={product} products={products} />
+                  <FeaturedList key={product._id} product={product} />
                 ))}
             </div>
 

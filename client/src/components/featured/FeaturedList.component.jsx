@@ -14,8 +14,9 @@ const FeaturedList = ({product}) => {
         <Fragment>
             <div className="col-lg-3 col-md-4 col-6 grid_item">
                     <div className="product">
+                    {product.quantity === "0" && <span className="pr_flash bg-danger">Sold Out</span>}
                     <div className="product_img">
-                            <img src={product.img} alt="img" />
+                            <img src={product.img} alt="img" className="img_product" />
                         <div className="product_action_box">
                         <ul className="list_none pr_action_btn">
                             <li className="add-to-cart">
@@ -41,7 +42,7 @@ const FeaturedList = ({product}) => {
                         </h6>
                         <div className="product_price">
                         <span className="price">{currencyFormat(+product.price)}</span>
-                        <del>{currencyFormat(+product.previous_price)}</del>
+                        <del>{product.previous_price !== "0" && product.previous_price !== "" && currencyFormat(+product.previous_price)}</del>
                         </div>
                         <div className="pr_desc">
                         <p>{product.description}</p>

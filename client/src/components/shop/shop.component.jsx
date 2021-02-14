@@ -29,14 +29,17 @@ const Shop = ({getPaginatedProducts, paginated_products, totalPages, currentPage
                     filtered.map((product) => (
                       <div key={product._id} className="col-lg-3 col-md-4 col-6 grid_item">
                       <div className="product">
+                         {product.quantity === "0" && <span className="pr_flash bg-danger">Sold Out</span>}
                          <div className="product_img">
                             <img src={product.img} alt="img" className="img_product"  />
                                   <div className="product_action_box">
                                   <ul className="list_none pr_action_btn">
                                   <li className="add-to-cart">
-                                    <Link to="#!" onClick={() => addItemToCart(product)}>
-                                        <i className="ti-shopping-cart"></i> Add To Cart
-                                    </Link>
+                                    {product.quantity !== "0" && 
+                                      <Link to="#!" onClick={() => addItemToCart(product)}>
+                                          <i className="ti-shopping-cart"></i> Add To Cart
+                                      </Link>
+                                    }
                                     </li>
                                       
                                       <li>
@@ -76,14 +79,17 @@ const Shop = ({getPaginatedProducts, paginated_products, totalPages, currentPage
                   paginated_products.map((product) => (
                     <div key={product._id} className="col-lg-3 col-md-4 col-6 grid_item">
                     <div className="product">
+                        {product.quantity === "0" && <span className="pr_flash bg-danger">Sold Out</span>}
                        <div className="product_img">
-                                    <img src={product.img} alt="img" />
+                                    <img src={product.img} alt="img" className="img_product"  />
                                 <div className="product_action_box">
                                 <ul className="list_none pr_action_btn">
                                     <li className="add-to-cart">
-                                    <Link to="#!" onClick={() => addItemToCart(product)}>
-                                        <i className="ti-shopping-cart"></i> Add To Cart
-                                    </Link>
+                                    {product.quantity !== "0" && 
+                                      <Link to="#!" onClick={() => addItemToCart(product)}>
+                                          <i className="ti-shopping-cart"></i> Add To Cart
+                                      </Link>
+                                    }
                                     </li>
                                     
                                     <li>

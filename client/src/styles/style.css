@@ -29,6 +29,10 @@ a {
   overflow: hidden;
 }
 
+.pr_detail .product_price {
+  float: none !important;
+}
+
 .min-vh-50 {
   min-height: 50vh;
 }
