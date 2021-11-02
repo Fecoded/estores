@@ -15,7 +15,7 @@ dotenv.config({ path: "./config/.env" });
 connectDb();
 
 // Passport Config
-require("./config/passport")(passport);
+// require("./config/passport")(passport);
 
 // Session
 app.use(
@@ -29,8 +29,8 @@ app.use(
 // Parse Middleware
 app.use(cors());
 app.use(express.json());
-app.use(passport.initialize());
-app.use(passport.session());
+// app.use(passport.initialize());
+// app.use(passport.session());
 if (process.env.NODE_ENV === "development") {
   app.use(morgan("dev"));
 }
@@ -65,9 +65,7 @@ if (process.env.NODE_ENV === "production") {
   );
 
   // Service Worker
-  app.get('/service-worker.js', (req, res) => {
-    res.sendFile(path.solve(__dirname, 'client', 'build', 'service-worker.js'));
+  app.get("/service-worker.js", (req, res) => {
+    res.sendFile(path.solve(__dirname, "client", "build", "service-worker.js"));
   });
 }
-
-
